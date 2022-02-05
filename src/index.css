@@ -9,15 +9,11 @@ html::-webkit-scrollbar {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  /* background-color: #f2f4f8; */
-  background-color: #333;
+  background-color: #f2f4f8;
+  /* color: #dedede; */
+  /* background-color: #333; */
   margin: 0;
   box-sizing: border-box;
-}
-
-.home-in {
-  color: #dedede;
-  text-align: center;
 }
 
 a {
