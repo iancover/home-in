@@ -28,7 +28,7 @@ button {
 }
 
 .input,
-.passwordInput,
+.pwdInput,
 .emailInput,
 .nameInput,
 .textarea {
@@ -45,7 +45,7 @@ button {
 }
 @media (min-width: 1100px) {
   .input,
-  .passwordInput,
+  .pwdInput,
   .emailInput,
   .nameInput,
   .textarea {
@@ -198,17 +198,17 @@ button {
     no-repeat;
 }
 
-.passwordInputDiv {
+.pwdInputDiv {
   position: relative;
 }
 
-.passwordInput {
+.pwdInput {
   margin-bottom: 2rem;
   background: url('./assets/svg/lockIcon.svg') #ffffff 2.5% center
     no-repeat;
 }
 
-.showPassword {
+.showPwd {
   cursor: pointer;
   position: absolute;
   top: -4%;
@@ -216,7 +216,16 @@ button {
   padding: 1rem;
 }
 
-.forgotPasswordLink {
+.hidePwd {
+  cursor: pointer;
+  position: absolute;
+  top: -4%;
+  right: 1%;
+  padding: 1rem;
+  opacity: .3;
+}
+
+.forgotPwdLink {
   cursor: pointer;
   color: #00cc66;
   font-weight: 600;
