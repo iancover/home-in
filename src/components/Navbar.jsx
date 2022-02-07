@@ -15,9 +15,9 @@ function Navbar() {
 
   return (
     <footer className='navbar'>
-      <nav className='navbarNav'>
-        <ul className='navbarListItems'>
-          <li className='navbarListItem' onClick={() => navigate('/')}>
+      <nav className='navbar-nav'>
+        <ul className='nav-list-items'>
+          <li className='nav-list-item' onClick={() => navigate('/')}>
             <ExploreIcon
               fill={pathMatchRoute('/') ? '#2c2c2c' : '#8f8f8f'}
               width='36px'
@@ -26,13 +26,13 @@ function Navbar() {
             <p
               className={
                 pathMatchRoute('/')
-                  ? 'navbarListItemNameActive'
-                  : 'navbarListItemName'
+                  ? 'nav-list-item-name-active'
+                  : 'nav-list-item-name'
               }>
               Explore
             </p>
           </li>
-          <li className='navbarListItem'>
+          <li className='nav-list-item'>
             <OfferIcon
               fill={pathMatchRoute('/offers') ? '#2c2c2c' : '#8f8f8f'}
               width='36px'
@@ -42,13 +42,13 @@ function Navbar() {
             <p
               className={
                 pathMatchRoute('/offers')
-                  ? 'navbarListItemNameActive'
-                  : 'navbarListItemName'
+                  ? 'nav-list-item-name-active'
+                  : 'nav-list-item-name'
               }>
               Offer
             </p>
           </li>
-          <li className='navbarListItem'>
+          <li className='nav-list-item'>
             <PersonOutlineIcon
               fill={pathMatchRoute('/profile') ? '#2c2c2c' : '#8f8f8f'}
               width='36px'
@@ -58,8 +58,8 @@ function Navbar() {
             <p
               className={
                 pathMatchRoute('/profile')
-                  ? 'navbarListItemNameActive'
-                  : 'navbarListItemName'
+                  ? 'nav-list-item-name-active'
+                  : 'nav-list-item-name'
               }>
               Profile
             </p>
