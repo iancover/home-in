@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   getAuth,
@@ -37,17 +38,17 @@ function SignUp() {
     try {
       // 1. init auth middleware
       const auth = getAuth();
-      
+
       // 2. create user w/email & pwd credentials
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         pwd
-        );
-        
+      );
+
       // 3. init 'user' obj
       const user = userCredential.user;
-        
+
       // 4. update profile name w/current auth user
       updateProfile(auth.currentUser, {
         displayName: name,
@@ -64,7 +65,8 @@ function SignUp() {
       // 7. go home and/or log error
       navigate('/');
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      toast.error('Registration Error! Please Try Again');
     }
   };
 
