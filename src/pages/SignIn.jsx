@@ -26,17 +26,19 @@ function SignIn() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    // firebase: sign in user
     try {
-      // firebase: get auth method
+      // 1. init auth middleware
       const auth = getAuth();
-      // firebase: sign in auth user async
+
+      // 2. sign in user
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         pwd
       );
 
-      // if user valid, navigate home
+      // 3. go home if user auth or log error
       if (userCredential.user) {
         navigate('/');
       }
@@ -102,3 +104,11 @@ function SignIn() {
 }
 
 export default SignIn;
+
+// NOTES:
+// [e.target.id]: e.target.value
+// do this to pass the value based on input id, 'email' or 'pwd'
+//    email: john@email.com
+
+// FIREBASE > DOCS > BUILD > AUTH > WEB
+// https://firebase.google.com/docs/auth/web/start#sign_in_existing_users
