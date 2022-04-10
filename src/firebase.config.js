@@ -1,13 +1,6 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-// import { getAnalytics, logEvent } from 'firebase/analytics';
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: 'AIzaSyBG3TtmWDyHiqlKrBrJU5uvPx1x4DJPLqM',
   authDomain: 'home-in-app.firebaseapp.com',
@@ -18,12 +11,31 @@ const firebaseConfig = {
   measurementId: 'G-R772YK0MHF',
 };
 
-// Initialize Firebase
 initializeApp(firebaseConfig);
 
-// Google Analytics
+export const db = getFirestore();
+
+// STEPS:
+// ---------
+// 1. Import functions needed from their SDKs
+//    'initializeApp' from 'app' SDK
+//    'getFirestore' from 'firestore' SDK for database
+// 
+// 2. Your web app's Firebase configuration
+//    For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// 
+// 3. Initialize Firebaase
+// 
+// 4. Export 'getFirestore()'
+
+// FOR GOOGLE ANALYTICS:
+// --------------------------
+// import { getAnalytics, logEvent } from 'firebase/analytics';
+// 
 // const app = initializeApp(firebaseConfig)
 // const analytics = getAnalytics(app);
 // logEvent(analytics, 'notification_received');
 
-export const db = getFirestore();
+// OTHER FIREBASE PRODUCTS:
+// --------------------------
+// https://firebase.google.com/docs/web/setup#available-libraries
