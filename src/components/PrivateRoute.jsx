@@ -14,3 +14,6 @@ const PrivateRoute = () => {
 export default PrivateRoute;
 
 // 'useAuthStatus' checks if auth user before redirecting to SignIn
+
+// if logged in <Outlet /> == <Profile />
+// else go to SignIn pg

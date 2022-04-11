@@ -24,4 +24,9 @@ export const useAuthStatus = () => {
 // if user is logged in, allowing an auth user to view Profile without
 // being redirected to SignIn
 
+// Protected Routes v6
 // https://stackoverflow.com/questions/65505665/protected-route-with-firebase
+
+// Fix Memory Leak Warning
+// https://stackoverflow.com/questions/59780268/cleanup-memory-leaks-on-an-unmounted-component-in-react-hooks
+
