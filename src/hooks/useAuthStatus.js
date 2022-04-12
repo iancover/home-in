@@ -19,10 +19,11 @@ export const useAuthStatus = () => {
 };
 
 // NOTES
-// Since we cant include a <PrivateRoute> component directly, we build
-// this 'custom hook' to use Firebase middleware to handle changing state
-// if user is logged in, allowing an auth user to view Profile without
-// being redirected to SignIn
+// Custom hook which uses Firebase fn to handle auth state
+// to be able to redirect auth user to <Profile>
+// 'useEffect()'
+// fixes memory leak error that happens on trying
+// to update state on an unmounted component
 
 // Protected Routes v6
 // https://stackoverflow.com/questions/65505665/protected-route-with-firebase
