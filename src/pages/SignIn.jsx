@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
+// Firebase & Toastify
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
+import { toast } from 'react-toastify';
+// Icons
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
+// Components
+import OAuth from '../components/OAuth';
 
 function SignIn() {
   const [showPwd, setShowPwd] = useState(false);
@@ -96,7 +100,8 @@ function SignIn() {
           </div>
         </form>
 
-        {/* Google OAuth */}
+        <OAuth />
+
         <Link to='/sign-up' className='register-link'>
           Sign Up Instead
         </Link>

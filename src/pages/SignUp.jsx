@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
+// Firebase & Toastify
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -8,8 +8,12 @@ import {
 } from 'firebase/auth';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config';
-import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
+import { toast } from 'react-toastify';
+// Icons
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
+// Components
+import OAuth from '../components/OAuth';
 
 function SignUp() {
   const [showPwd, setShowPwd] = useState(false);
@@ -31,38 +35,26 @@ function SignUp() {
     }));
   };
 
+  // Create user w/email & pwd in Firebase & go home
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // firebase: create new user
     try {
-      // 1. init auth middleware
       const auth = getAuth();
-
-      // 2. create user w/email & pwd credentials
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         pwd
       );
-
-      // 3. init 'user' obj
       const user = userCredential.user;
-
-      // 4. update profile name w/current auth user
       updateProfile(auth.currentUser, {
         displayName: name,
       });
-
-      // 5. create copy of user to add to db without pwd
       const formDataCopy = { ...formData };
       delete formDataCopy.pwd;
-
-      // 6. add server timestamp & set doc to 'users' db collection w/uid
       formDataCopy.timestamp = serverTimestamp();
       await setDoc(doc(db, 'users', user.uid), formDataCopy);
 
-      // 7. go home and/or log error
       navigate('/');
     } catch (error) {
       // console.log(error);
@@ -122,7 +114,8 @@ function SignUp() {
           </div>
         </form>
 
-        {/* Google OAuth */}
+        <OAuth />
+
         <Link to='/sign-in' className='register-link'>
           Sign In Instead
         </Link>
@@ -132,3 +125,14 @@ function SignUp() {
 }
 
 export default SignUp;
+
+// NOTES
+// onSubmit:
+//  Create new user in Firebase with Email & Pwd
+//  1. init auth middleware
+//  2. create user w/email & pwd credentials
+//  3. init 'user' obj
+//  4. update profile name w/current auth user
+//  5. create copy of user to add to db without pwd
+//  6. log server timestamp & set doc to 'users' db collection w/uid
+//  7. go home and/or log error
