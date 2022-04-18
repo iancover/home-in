@@ -27,6 +27,13 @@ button {
   border: none;
 }
 
+input::placeholder,
+textarea::placeholder {
+  opacity: 0.6;
+  font-weight: normal;
+  font-style: italic;
+}
+
 .input,
 .pwd-input,
 .email-input,
@@ -85,6 +92,10 @@ button {
   position: absolute;
   top: -3.4%;
   right: 20px;
+}
+
+.lighter {
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .pg-container,
