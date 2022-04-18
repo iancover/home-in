@@ -112,13 +112,12 @@ function CreateListing() {
 
       if (location === undefined || location.includes('undefined')) {
         setLoading(false);
-        toast.error('Please enter a correct address.');
+        toast.error('Please enter correct address format.');
         return;
       }
     } else {
       geolocation.lat = latitude;
       geolocation.lng = longitude;
-      location = address;
     }
 
     // Store image in Firebase & return URL
@@ -160,8 +159,12 @@ function CreateListing() {
       });
     };
 
-    // array of firebase stored img URLs & catch reject(error)
-    const imageUrls = await Promise.all([...images].map((image) => storeImage(image))).catch(() => {
+    // Run storeImage() on each img file & return array of URLs
+    const imageUrls = await Promise.all(
+      [...images].map((image) => {
+        return storeImage(image);
+      })
+    ).catch(() => {
       setLoading(false);
       toast.error('Images not uploaded');
       return;
@@ -175,7 +178,7 @@ function CreateListing() {
       timestamp: serverTimestamp(),
     };
 
-    formDataCopy.location = location;
+    formDataCopy.location = address;
     delete formDataCopy.images;
     delete formDataCopy.address;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
@@ -440,6 +443,3 @@ function CreateListing() {
 }
 
 export default CreateListing;
-
-
-
