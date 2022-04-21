@@ -57,6 +57,10 @@ function Profile() {
     }));
   };
 
+  // TODO: add fn's to pass to <ListingItem> for auth user to delete/edit listing
+  //  const onDelete = async (listingId) => {}
+  //  const onEdit = (listingId) => {}
+
   return (
     <div className='profile'>
       <header className='profile-header'>
