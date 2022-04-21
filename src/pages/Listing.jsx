@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+// Leaflet
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 // Firebase
 import { doc, getDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
@@ -80,7 +82,21 @@ function Listing() {
 
         <p className='listing-location-title'>Location</p>
 
-        {/* MAP */}
+        <div className='leaflet-container'>
+          <MapContainer
+            style={{ height: '100%', width: '100%' }}
+            center={[listing.geolocation.lat, listing.geolocation.lng]}
+            zoom={13}
+            scrollWheelZoom={false}>
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
+            />
+            <Marker position={[listing.geolocation.lat, listing.geolocation.lng]}>
+              <Popup>{listing.location}</Popup>
+            </Marker>
+          </MapContainer>
+        </div>
 
         {auth.currentUser?.uid !== listing.userRef && (
           <Link
@@ -101,3 +117,6 @@ export default Listing;
 //    \B - not word boundary
 //    (?=(\d{3})) - before three digits
 //    +(?!\d) - and not before a single digit
+
+// Fix Leaflet issues:
+// https://stackoverflow.com/questions/67552020/how-to-fix-error-failed-to-compile-node-modules-react-leaflet-core-esm-pat
