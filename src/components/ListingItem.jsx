@@ -4,6 +4,8 @@ import bedIcon from '../assets/svg/bedIcon.svg';
 import bathtubIcon from '../assets/svg/bathtubIcon.svg';
 
 function ListingItem({ listing, id, onDelete }) {
+  // NOTE:
+  //  onEdit & onDelete: option in <Profile> only for current auth user
   return (
     <li className='cat-listing'>
       <Link
