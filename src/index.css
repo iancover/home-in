@@ -715,6 +715,7 @@ textarea::placeholder {
   position: relative;
   width: 100%;
   height: 100%;
+  border-radius: 5px;
 }
 
 .swiper-slide-img {
@@ -724,14 +725,16 @@ textarea::placeholder {
 
 .swiper-slide-txt {
   position: absolute;
-  top: 70px;
-  left: 0;
-  padding: 0.5rem;
-  max-width: 90%;
-  font-size: 1.25rem;
+  top: -3%;
+  right: 0;
+  padding: 0.5rem 0.5rem 0.5rem 2.25rem;
+  max-width: 60%;
+  font-size: 1.10rem;
   font-weight: 600;
   color: #ffffff;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
 }
 @media (min-width: 1024px) {
   .swiper-slide-txt {
@@ -741,14 +744,15 @@ textarea::placeholder {
 
 .swiper-slide-price {
   position: absolute;
-  top: 143px;
-  left: 11px;
+  top: 75%;
+  right: 11px;
   max-width: 90%;
   padding: 0.25rem 0.5rem;
   font-weight: 600;
   color: #000000;
   background-color: #ffffff;
   border-radius: 1rem;
+  opacity: .85;
 }
 @media (min-width: 1024px) {
   .swiper-slide-price {
