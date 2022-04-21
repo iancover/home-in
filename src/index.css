@@ -103,7 +103,6 @@ a {
   cursor: pointer;
 }
 
-
 /*   I N P U T S   */
 
 .input,
@@ -187,7 +186,6 @@ textarea::placeholder {
   color: #00cc66;
   cursor: pointer;
 }
-
 
 /*  F O R M S  */
 
@@ -348,7 +346,6 @@ textarea::placeholder {
   }
 }
 
-
 /*  N A V B A R  */
 
 .navbar {
@@ -396,7 +393,6 @@ textarea::placeholder {
 .nav-list-item-name-active {
   color: #2c2c2c;
 }
-
 
 /*  S I G N  I N / U P / O U T  */
 
@@ -481,7 +477,6 @@ textarea::placeholder {
   cursor: pointer;
 }
 
-
 /*  E X P L O R E  */
 
 @media (min-width: 1217px) {
@@ -526,7 +521,6 @@ textarea::placeholder {
   font-weight: 500;
   text-align: left;
 }
-
 
 /*  C A T E G O R Y  &  L I S T I N G S  */
 
@@ -653,25 +647,34 @@ textarea::placeholder {
 }
 
 .listing-type {
-  padding: 0.25rem 0.5rem;
-  background-color: #00cc66;
-  color: #ffffff;
-  border-radius: 2rem;
   display: inline;
+  margin-right: 1rem;
+  padding: 0.25rem 0.5rem;
+  color: #ffffff;
+  background-color: #00cc66;
+  border-radius: 2rem;
   font-weight: 600;
   font-size: 0.8rem;
-  margin-right: 1rem;
 }
+
 
 .listing-details-list {
-  padding: 0;
-  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+  /* background-color: rgba(128, 128, 128, 0.3); */
 }
 
-.listing-details-list li {
-  margin: 0.3rem 0;
+.listing-details-item {
   font-weight: 500;
   opacity: 0.8;
+  /* background-color: rgba(128, 128, 128, 0.3); */
+}
+
+.list-dot {
+  font-weight: bolder;
+  font-size: 1.5rem;
 }
 
 .listing-location-title {
@@ -679,6 +682,7 @@ textarea::placeholder {
   font-weight: 600;
   font-size: 1.25rem;
 }
+
 
 .listing-txt {
   margin-top: 3rem;
@@ -698,7 +702,6 @@ textarea::placeholder {
   background-color: #000000;
   border-radius: 1rem;
 }
-
 
 /*  S W I P E R  */
 
@@ -729,7 +732,7 @@ textarea::placeholder {
   right: 0;
   padding: 0.5rem 0.5rem 0.5rem 2.25rem;
   max-width: 60%;
-  font-size: 1.10rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #ffffff;
   background-color: rgba(0, 0, 0, 0.5);
@@ -752,7 +755,7 @@ textarea::placeholder {
   color: #000000;
   background-color: #ffffff;
   border-radius: 1rem;
-  opacity: .85;
+  opacity: 0.85;
 }
 @media (min-width: 1024px) {
   .swiper-slide-price {
@@ -760,12 +763,11 @@ textarea::placeholder {
   }
 }
 
-
 /*  L E A F L E T  */
 
 .leaflet-container {
   width: 100%;
-  height: 200px;
+  height: 300px;
   margin-bottom: 3rem;
   border-radius: 5px;
   box-shadow: 1.5px 1.5px 4px 2px rgba(0, 0, 0, 0.1);
@@ -776,7 +778,6 @@ textarea::placeholder {
     height: 400px;
   }
 }
-
 
 /*  U S E R  */
 
@@ -887,4 +888,3 @@ textarea::placeholder {
   font-size: 0.8rem;
   opacity: 0.75;
 }
-

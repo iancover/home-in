@@ -84,6 +84,7 @@ function Listing() {
             : listing.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         </p>
         <p className='listing-location'>{listing.location}</p>
+
         <p className='listing-type'>For {listing.type === 'rent' ? 'Rent' : 'Sale'}</p>
 
         {listing.offer && (
@@ -92,12 +93,27 @@ function Listing() {
           </p>
         )}
 
-        <ul className='listing-details-list'>
-          <li>{listing.bedrooms > 1 ? `${listing.bedrooms} Bedrooms` : '1 Bedroom'}</li>
-          <li>{listing.bathrooms > 1 ? `${listing.bathrooms} Bathrooms` : '1 Bathroom'}</li>
-          <li>{listing.parking && 'Parking Spot'}</li>
-          <li>{listing.furnished && 'Furnished'}</li>
-        </ul>
+        <div className='listing-details-list'>
+          <div>
+            <p className='listing-details-item'>
+              <strong className='list-dot'>• </strong>{' '}
+              {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : '1 Bed'}
+            </p>
+            <p className='listing-details-item'>
+              <strong className='list-dot'>• </strong>{' '}
+              {listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : '1 Bath'}
+            </p>
+          </div>
+
+          <div>
+            <p className='listing-details-item'>
+              <strong className='list-dot'>• </strong> {listing.parking ? 'No Parking' : 'No Parking'}
+            </p>
+            <p className='listing-details-item'>
+              <strong className='list-dot'>• </strong> {listing.furnished ? 'Unfurnished' : 'Unfurnished'}
+            </p>
+          </div>
+        </div>
 
         <p className='listing-location-title'>Location</p>
 
