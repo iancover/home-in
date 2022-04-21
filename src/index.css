@@ -538,13 +538,13 @@ textarea::placeholder {
 }
 
 .discount-price {
+  display: inline;
   padding: 0.25rem 0.5rem;
-  background-color: #000000;
-  color: #ffffff;
-  border-radius: 1rem;
   font-size: 0.8rem;
   font-weight: 600;
-  display: inline;
+  color: #ffffff;
+  background-color: #000000;
+  border-radius: 1rem;
 }
 
 .listing-type {
