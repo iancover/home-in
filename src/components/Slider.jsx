@@ -11,8 +11,7 @@ import 'swiper/swiper-bundle.css';
 import Spinner from './Spinner';
 
 // Swiper Modules Enable
-// SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
-SwiperCore.use([Autoplay]);
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
 function Slider() {
   const [loading, setLoading] = useState(true);
