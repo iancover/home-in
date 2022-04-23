@@ -1,30 +1,76 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-// firebase
+// Firebase
 import { getAuth, updateProfile } from 'firebase/auth';
-import { updateDoc, doc } from 'firebase/firestore';
+import {
+  updateDoc,
+  doc,
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  deleteDoc,
+} from 'firebase/firestore';
 import { db } from '../firebase.config';
-// toastify
+// Toastify
 import { toast } from 'react-toastify';
-// icons
+// Icons
 import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg';
 import homeIcon from '../assets/svg/homeIcon.svg';
+// Components
+import Spinner from '../components/Spinner';
+import ListingItem from '../components/ListingItem';
 
 function Profile() {
   const auth = getAuth();
 
-  // profile updated state
+  // state: spinner
+  const [loading, setLoading] = useState(true);
+
+  // state: listings
+  const [listings, setListings] = useState(null);
+
+  // state: profile updated
   const [changeDetails, setChangeDetails] = useState(false);
 
-  // input data state
+  // state: input data
   const [formData, setFormData] = useState({
     name: auth.currentUser.displayName,
     email: auth.currentUser.email,
   });
   const { name, email } = formData;
 
-  // logout & redirect home
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserListings = async () => {
+      const listingsRef = collection(db, 'listings');
+
+      const q = query(
+        listingsRef,
+        where('userRef', '==', auth.currentUser.uid),
+        orderBy('timestamp', 'desc')
+      );
+
+      const querySnap = await getDocs(q);
+      const listings = [];
+
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setListings(listings);
+      setLoading(false);
+    };
+
+    fetchUserListings();
+  }, [auth.currentUser.uid]);
+
+  // logout & redirect home
   const onLogout = () => {
     auth.signOut();
     navigate('/');
@@ -58,8 +104,19 @@ function Profile() {
   };
 
   // TODO: add fn's to pass to <ListingItem> for auth user to delete/edit listing
-  //  const onDelete = async (listingId) => {}
+  const onDelete = async (listingId) => {
+    if (window.confirm('Are you sure you want to delete listing?')) {
+      await deleteDoc(doc(db, 'listings', listingId));
+      const updatedListings = listings.filter((listing) => listing.id !== listingId);
+      setListings(updatedListings)
+      toast.success('Deleted listing.')
+    }
+  };
   //  const onEdit = (listingId) => {}
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className='profile'>
@@ -89,9 +146,7 @@ function Profile() {
               type='text'
               id='name'
               value={name}
-              className={
-                !changeDetails ? 'profile-name' : 'profile-name-active'
-              }
+              className={!changeDetails ? 'profile-name' : 'profile-name-active'}
               disabled={!changeDetails}
               onChange={onChange}
             />
@@ -99,19 +154,34 @@ function Profile() {
               type='text'
               id='email'
               value={email}
-              className={
-                !changeDetails ? 'profile-email' : 'profile-email-active'
-              }
+              className={!changeDetails ? 'profile-email' : 'profile-email-active'}
               disabled={!changeDetails}
               onChange={onChange}
             />
           </form>
         </div>
+
         <Link to='/create-listing' className='create-listing'>
-          <img src={homeIcon} alt="home" />
+          <img src={homeIcon} alt='home' />
           <p>Sell or Rent your home</p>
-          <img src={arrowRight} alt="arrow right" />
+          <img src={arrowRight} alt='arrow right' />
         </Link>
+
+        {!loading && listings?.length > 0 && (
+          <>
+            <p className='listing-txt'>Your Listings</p>
+            <ul className='listings-list'>
+              {listings.map((listing) => (
+                <ListingItem
+                  key={listing.id}
+                  listing={listing.data}
+                  id={listing.id}
+                  onDelete={onDelete}
+                />
+              ))}
+            </ul>
+          </>
+        )}
       </main>
     </div>
   );
@@ -119,14 +189,17 @@ function Profile() {
 
 export default Profile;
 
-// onSubmit:
-//    if 'auth.currentUser.displayName' doesn't match 'name',
-//    which 'onChange' just updated in real time.
-//    then update firebase name to display
-//    and name stored in firestore db doc 
-//    and handle error
-
+// changeDetails state:
+// -  To toggle between 'done/change' to change user details
+// -  To enable/disable inputs to type
+//
+// onChange:
+// -  To update input text as user types
+//
 // onClick:
-//    clicking <p> if 'changeDetails' is true/false toggles 'change/done'
-//    and enables inputs to update data details
-//    if 'changeDetails' is false, fires 'onSubmit' and toggles 'done/change'
+// -  Toggles the 'done/change' to change the user's details
+// -  if 'changeDetails == true' runs 'onSubmit()' & toggles text to 'done'
+
+// onSubmit:
+// -  Sends input data to update the user's display name in Firestore
+// -  'onChange' only updates session display name when user types
