@@ -8,6 +8,10 @@ html::-webkit-scrollbar {
   display: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
@@ -720,12 +724,7 @@ textarea::placeholder {
   border-radius: 1rem;
 }
 
-html {
-  scroll-behavior: smooth;
-  transition-property: scroll-behavior;
-  transition-duration: 4000ms;
-  transition-delay: 2s;
-}
+
 
 /*  S W I P E R  */
 
