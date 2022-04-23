@@ -14,6 +14,10 @@ body {
   background-color: #93dda8;
 }
 
+li {
+  list-style: none;
+}
+
 .flex {
   display: flex;
 }
@@ -89,10 +93,11 @@ a {
   cursor: pointer;
 }
 
-.remove-icon {
+.delete-icon {
   position: absolute;
-  top: -3%;
-  right: -2%;
+  top: 25%;
+  right: -1%;
+  height: 30px;
   cursor: pointer;
 }
 
@@ -533,11 +538,11 @@ textarea::placeholder {
 }
 
 .cat-listing {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  position: relative;
 }
 
 .cat-listing-link {
@@ -567,16 +572,18 @@ textarea::placeholder {
 }
 
 .cat-listing-location {
-  font-weight: 600;
-  font-size: 0.7rem;
-  opacity: 0.8;
   margin-bottom: 0;
+  font-weight: 600;
+  font-size: 0.75rem;
+  opacity: 0.8;
 }
 
 .cat-listing-name {
-  font-weight: 600;
-  font-size: 1.25rem;
   margin: 0;
+  width: 90%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  /* background-color: rgba(0, 0, 0, 0.1); */
 }
 
 .cat-listing-price {
@@ -657,7 +664,6 @@ textarea::placeholder {
   font-size: 0.8rem;
 }
 
-
 .listing-details-list {
   display: flex;
   justify-content: space-around;
@@ -682,7 +688,6 @@ textarea::placeholder {
   font-weight: 600;
   font-size: 1.25rem;
 }
-
 
 .listing-txt {
   margin-top: 3rem;
