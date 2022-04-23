@@ -47,9 +47,15 @@ function Listing() {
     return <Spinner />;
   }
 
+  console.log(listing.location);
+
   return (
     <main>
       <Swiper
+        style={{
+          '--swiper-navigation-color': 'rgba(81, 205, 137, 0.9)',
+          '--swiper-pagination-color': 'rgba(69, 180, 119, 0.9)',
+        }}
         slidesPerView={1}
         pagination={{ clickable: true }}
         navigation={true}>
@@ -80,18 +86,28 @@ function Listing() {
       {shareLinkCopied && <p className='link-copied'>Link Copied!</p>}
 
       <div className='listing-details'>
-        <p className='listing-name'>
-          {listing.name} - $
+        <p className='listing-name'>{listing.name}</p>
+        <a href='#map'>
+          <p className='listing-location'>
+            {listing.location
+              .match(/(\w+\s[A-z]+\.?\s?)+(?=(,\s([A-z]+\s?)+,\s[A-Z]{2}\s\d{5}))/g)
+              .toString()}
+            <br />
+            {listing.location.match(/([A-Z][a-z]+\s?)+,\s[A-Z]{2}\s\d{5}/g).toString()}
+          </p>
+        </a>
+
+        <p className='listing-price'>
+          ${' '}
           {listing.offer
             ? listing.discountedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
             : listing.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         </p>
-        <p className='listing-location'>{listing.location}</p>
 
         <p className='listing-type'>For {listing.type === 'rent' ? 'Rent' : 'Sale'}</p>
 
         {listing.offer && (
-          <p className='discount-price'>
+          <p className='listing-discount-price'>
             ${listing.regularPrice - listing.discountedPrice} discount
           </p>
         )}
@@ -99,22 +115,22 @@ function Listing() {
         <div className='listing-details-list'>
           <div>
             <p className='listing-details-item'>
-              <strong className='list-dot'>• </strong>{' '}
+              <strong className='list-dot'>&middot;</strong>{' '}
               {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : '1 Bed'}
             </p>
             <p className='listing-details-item'>
-              <strong className='list-dot'>• </strong>{' '}
+              <strong className='list-dot'>&middot;</strong>{' '}
               {listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : '1 Bath'}
             </p>
           </div>
 
           <div>
             <p className='listing-details-item'>
-              <strong className='list-dot'>• </strong>{' '}
+              <strong className='list-dot'>&middot;</strong>{' '}
               {listing.parking ? 'No Parking' : 'No Parking'}
             </p>
             <p className='listing-details-item'>
-              <strong className='list-dot'>• </strong>{' '}
+              <strong className='list-dot'>&middot;</strong>{' '}
               {listing.furnished ? 'Unfurnished' : 'Unfurnished'}
             </p>
           </div>
@@ -122,15 +138,16 @@ function Listing() {
 
         <p className='listing-location-title'>Location</p>
 
-        <div className='leaflet-container'>
+        <div className='leaflet-container' id='map'>
           <MapContainer
             style={{ height: '100%', width: '100%' }}
             center={[listing.geolocation.lat, listing.geolocation.lng]}
             zoom={13}
             scrollWheelZoom={false}>
             <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              attribution='&copy;&nbsp;<a href="http://osm.org/copyright">OpenStreetMap</a>'
               url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
+              className='tile-layer-bg'
             />
             <Marker position={[listing.geolocation.lat, listing.geolocation.lng]}>
               <Popup>{listing.location}</Popup>
