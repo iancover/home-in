@@ -49,7 +49,10 @@ function Listing() {
 
   return (
     <main>
-      <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+      <Swiper
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        navigation={true}>
         {listing.imageUrls.map((url, index) => (
           <SwiperSlide key={index}>
             <div
@@ -107,10 +110,12 @@ function Listing() {
 
           <div>
             <p className='listing-details-item'>
-              <strong className='list-dot'>• </strong> {listing.parking ? 'No Parking' : 'No Parking'}
+              <strong className='list-dot'>• </strong>{' '}
+              {listing.parking ? 'No Parking' : 'No Parking'}
             </p>
             <p className='listing-details-item'>
-              <strong className='list-dot'>• </strong> {listing.furnished ? 'Unfurnished' : 'Unfurnished'}
+              <strong className='list-dot'>• </strong>{' '}
+              {listing.furnished ? 'Unfurnished' : 'Unfurnished'}
             </p>
           </div>
         </div>
