@@ -110,6 +110,8 @@ function CreateListing() {
 
       location = data.status === 'ZERO_RESULTS' ? undefined : data.results[0]?.formatted_address;
 
+      console.log(data);
+
       if (location === undefined || location.includes('undefined')) {
         setLoading(false);
         toast.error('Please enter correct address format.');
@@ -225,7 +227,7 @@ function CreateListing() {
       </header>
       <main>
         <form onSubmit={onSubmit}>
-          <label className='form-label'>Sell / Rent</label>
+          <label className='form-label'>Listing Type</label>
           <div className='form-btns'>
             <button
               className={type === 'sale' ? 'form-btn-active' : 'form-btn'}
@@ -245,7 +247,7 @@ function CreateListing() {
             </button>
           </div>
 
-          <label className='form-label'>Listing Name</label>
+          <label className='form-label'>Listing Title Display</label>
           <input
             className='form-input-name'
             type='text'
@@ -254,13 +256,12 @@ function CreateListing() {
             onChange={onMutate}
             maxLength='32'
             minLength='10'
-            placeholder='e.g. "Beautiful Garden Home"'
+            placeholder='e.g. "Modern Garden Home"'
             required
           />
 
-          <div className='form-rooms flex'>
-            <div>
-              <label className='form-label'>Bedrooms</label>
+          <div className='form-rooms'>
+            <div className='flex'>
               <input
                 className='form-input-small'
                 type='number'
@@ -271,9 +272,9 @@ function CreateListing() {
                 max='20'
                 required
               />
+              <label className='form-label'>Bedrooms</label>
             </div>
-            <div>
-              <label className='form-label'>Bathrooms</label>
+            <div className='flex'>
               <input
                 className='form-input-small'
                 type='number'
@@ -284,10 +285,11 @@ function CreateListing() {
                 max='20'
                 required
               />
+              <label className='form-label'>Bathrooms</label>
             </div>
           </div>
 
-          <label className='form-label'>Parking spot</label>
+          <label className='form-label'>Parking Available</label>
           <div className='form-btns'>
             <button
               className={parking ? 'form-btn-active' : 'form-btn'}
@@ -336,9 +338,10 @@ function CreateListing() {
             id='address'
             value={address}
             onChange={onMutate}
-            placeholder='123 Main St.&#13;New York, NY 10001'
+            placeholder='street , city , st zip'
             required
           />
+          <small className='images-info lighter'>&emsp; Street, City, State comma separated.</small>
 
           {!geolocationEnabled && (
             <div className='form-lat-lng flex'>
@@ -430,7 +433,7 @@ function CreateListing() {
             required
           />
           <small className='images-info lighter'>
-            &emsp;Max 6 images, first image is listing cover display.
+            &emsp;Max 6 images, listing cover will be first image.
           </small>
 
           <button type='submit' className='btn-primary create-listing-btn'>
