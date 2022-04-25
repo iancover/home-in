@@ -3,14 +3,14 @@ import { useNavigate, Link } from 'react-router-dom';
 // Firebase
 import { getAuth, updateProfile } from 'firebase/auth';
 import {
-  updateDoc,
   doc,
   collection,
   getDocs,
+  updateDoc,
+  deleteDoc,
   query,
   where,
   orderBy,
-  deleteDoc,
 } from 'firebase/firestore';
 import { db } from '../firebase.config';
 // Toastify
@@ -176,7 +176,7 @@ function Profile() {
                   key={listing.id}
                   listing={listing.data}
                   id={listing.id}
-                  onDelete={onDelete}
+                  onDelete={() => onDelete(listing.id)}
                 />
               ))}
             </ul>
