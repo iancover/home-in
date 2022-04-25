@@ -24,21 +24,15 @@ import ListingItem from '../components/ListingItem';
 
 function Profile() {
   const auth = getAuth();
-
-  // state: spinner
+  // states: spinner, listings, details, form data
   const [loading, setLoading] = useState(true);
-
-  // state: listings
   const [listings, setListings] = useState(null);
-
-  // state: profile updated
   const [changeDetails, setChangeDetails] = useState(false);
-
-  // state: input data
   const [formData, setFormData] = useState({
     name: auth.currentUser.displayName,
     email: auth.currentUser.email,
   });
+
   const { name, email } = formData;
 
   const navigate = useNavigate();
@@ -46,25 +40,29 @@ function Profile() {
   // fetch listings from Firebase
   useEffect(() => {
     const fetchUserListings = async () => {
-      // build query
-      const listingsRef = collection(db, 'listings');
-      const q = query(
-        listingsRef,
-        where('userRef', '==', auth.currentUser.uid),
-        orderBy('timestamp', 'desc')
-      );
-      // get listings data
-      const querySnap = await getDocs(q);
-      const listings = [];
-      querySnap.forEach((doc) => {
-        return listings.push({
-          id: doc.id,
-          data: doc.data(),
+      try {
+        // build query
+        const listingsRef = collection(db, 'listings');
+        const q = query(
+          listingsRef,
+          where('userRef', '==', auth.currentUser.uid),
+          orderBy('timestamp', 'desc')
+        );
+        // get listings data
+        const querySnap = await getDocs(q);
+        const listings = [];
+        querySnap.forEach((doc) => {
+          return listings.push({
+            id: doc.id,
+            data: doc.data(),
+          });
         });
-      });
-      // set state listings
-      setListings(listings);
-      setLoading(false);
+        // set state listings
+        setListings(listings);
+        setLoading(false);
+      } catch (error) {
+        toast.error('Could not fetch listings.');
+      }
     };
 
     fetchUserListings();
@@ -108,8 +106,8 @@ function Profile() {
     if (window.confirm('Are you sure you want to delete listing?')) {
       await deleteDoc(doc(db, 'listings', listingId));
       const updatedListings = listings.filter((listing) => listing.id !== listingId);
-      setListings(updatedListings)
-      toast.success('Deleted listing.')
+      setListings(updatedListings);
+      toast.success('Deleted listing.');
     }
   };
   //  const onEdit = (listingId) => {}
@@ -196,7 +194,7 @@ export default Profile;
 // -  Create array of listings passing id & data
 // -  Set listings as state to send data to ListingItem
 //    if 'listings' array > 0 display ListingItem
-// 
+//
 // changeDetails state:
 // -  To toggle between 'done/change' to change user details
 // -  To enable/disable inputs to type
@@ -207,7 +205,7 @@ export default Profile;
 // onClick:
 // -  Toggles the 'done/change' to change the user's details
 // -  if 'changeDetails == true' runs 'onSubmit()' & toggles text to 'done'
-// 
+//
 // onSubmit:
 // -  Sends input data to update the user's display name in Firestore
 // -  'onChange' only updates session display name when user types
