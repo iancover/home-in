@@ -47,8 +47,6 @@ function Listing() {
     return <Spinner />;
   }
 
-  console.log(listing.location);
-
   return (
     <main>
       <Swiper
