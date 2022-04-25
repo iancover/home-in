@@ -199,13 +199,26 @@ textarea::placeholder {
 /*  F O R M S  */
 
 .form-label {
+  display: block;
   font-weight: 600;
   margin-top: 1rem;
-  display: block;
 }
 
 .form-btns {
   display: flex;
+}
+
+.form-rooms {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.form-rooms label {
+  padding-top: 5%;
+  margin-left: -35px;
+  margin-right: 15px;
 }
 
 .form-btn,
@@ -663,8 +676,7 @@ textarea::placeholder {
   margin-right: 1rem;
   padding: 0.25rem 0.5rem;
   color: #ffffff;
-  /* background-color: #00cc66; */
-  background-color: rgba(70, 73, 76, .8);
+  background-color: rgba(70, 73, 76, 0.8);
   border-radius: 2rem;
   font-weight: 600;
   font-size: 0.8rem;
@@ -675,14 +687,12 @@ textarea::placeholder {
   justify-content: space-around;
   align-items: center;
   margin-top: 10px;
-  /* background-color: rgba(128, 128, 128, 0.3); */
 }
 
 .listing-details-item {
   font-weight: 500;
   margin: -5px;
   opacity: 0.8;
-  /* background-color: rgba(128, 128, 128, 0.3); */
 }
 
 .list-dot {
@@ -719,12 +729,9 @@ textarea::placeholder {
   font-size: 0.8rem;
   font-weight: 600;
   color: #ffffff;
-  /* background-color: #000000; */
-  background-color: rgba(70, 73, 76, .8);
+  background-color: rgba(70, 73, 76, 0.8);
   border-radius: 1rem;
 }
-
-
 
 /*  S W I P E R  */
 
@@ -789,12 +796,10 @@ textarea::placeholder {
 .swiper-button-next,
 .swiper-button-prev {
   text-shadow: 1.5px 1.5px 4px rgba(0, 0, 0, 0.2);
-  /* offset-x | offset-y | blur | color */
 }
 
 .swiper-pagination-bullet {
   box-shadow: 1.5px 1.5px 4px 1.5px rgba(0, 0, 0, 0.3);
-  /* offset-x | offset-y | blur | spread | color */
 }
 
 .colors {
