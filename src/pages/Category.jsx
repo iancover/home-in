@@ -24,7 +24,6 @@ function Category() {
         // listings ref & query & get docs
         const listingsRef = collection(db, 'listings');
         const fetchLimit = 11;
-        const displayLimit = fetchLimit - 1;
         const q = query(
           listingsRef,
           where('type', '==', params.categoryName),
@@ -43,8 +42,8 @@ function Category() {
         });
 
         // to load more listings
-        if (listings.length <= displayLimit) {
-          console.log('All available listings fetched.');
+        if (listings.length <= fetchLimit - 1) {
+          console.log('Fetched all available listings.');
           setLastFetchedListing(false);
         } else {
           setLastFetchedListing(querySnap.docs.pop());
@@ -68,7 +67,6 @@ function Category() {
       // listings ref & query & get docs
       const listingsRef = collection(db, 'listings');
       const fetchLimit = 11;
-      const displayLimit = fetchLimit - 1;
       const q = query(
         listingsRef,
         where('type', '==', params.categoryName),
@@ -88,12 +86,10 @@ function Category() {
       });
 
       // to load more listings
-      if (listings.length <= displayLimit) {
-        console.log('Remaining listings fetched.');
+      if (listings.length <= fetchLimit - 1) {
+        console.log('Fetched all remaining listings.');
         setLastFetchedListing(false);
       } else {
-        // const lastVisible = querySnap.docs[querySnap.docs.length - 1];
-        // setLastFetchedListing(lastVisible);
         setLastFetchedListing(querySnap.docs.pop());
         listings.pop();
       }
