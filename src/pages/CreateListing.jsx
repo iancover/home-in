@@ -2,7 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 // Firebase
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config';
 // React-Toastify
@@ -108,7 +113,10 @@ function CreateListing() {
       //  'optional chaining ?' operator on 'results[0]?.geometry..' to avoid error
       //  'nullish coalescing ??' operator to return '0' if lat/lng = null/undefined
 
-      location = data.status === 'ZERO_RESULTS' ? undefined : data.results[0]?.formatted_address;
+      location =
+        data.status === 'ZERO_RESULTS'
+          ? undefined
+          : data.results[0]?.formatted_address;
 
       console.log(data);
 
@@ -136,7 +144,8 @@ function CreateListing() {
         uploadTask.on(
           'state_changed',
           (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
               case 'paused':
@@ -302,7 +311,9 @@ function CreateListing() {
               Yes
             </button>
             <button
-              className={!parking && parking !== null ? 'form-btn-active' : 'form-btn'}
+              className={
+                !parking && parking !== null ? 'form-btn-active' : 'form-btn'
+              }
               type='button'
               id='parking'
               value={false}
@@ -322,7 +333,11 @@ function CreateListing() {
               Yes
             </button>
             <button
-              className={!furnished && furnished !== null ? 'form-btn-active' : 'form-btn'}
+              className={
+                !furnished && furnished !== null
+                  ? 'form-btn-active'
+                  : 'form-btn'
+              }
               type='button'
               id='furnished'
               value={false}
@@ -341,7 +356,9 @@ function CreateListing() {
             placeholder='street , city , st zip'
             required
           />
-          <small className='images-info lighter'>&emsp; Street, City, State comma separated.</small>
+          <small className='images-info lighter'>
+            &emsp; Street, City, State comma separated.
+          </small>
 
           {!geolocationEnabled && (
             <div className='form-lat-lng flex'>
@@ -381,7 +398,9 @@ function CreateListing() {
               Yes
             </button>
             <button
-              className={!offer && offer !== null ? 'form-btn-active' : 'form-btn'}
+              className={
+                !offer && offer !== null ? 'form-btn-active' : 'form-btn'
+              }
               type='button'
               id='offer'
               value={false}
