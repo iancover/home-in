@@ -15,7 +15,8 @@ html {
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  background-color: #93dda8;
+  /* background-color: #93dda8; */
+  background-color: #7fbde3;
 }
 
 li {
@@ -99,16 +100,19 @@ a {
 
 .delete-icon {
   position: absolute;
-  top: 25%;
-  right: -1%;
-  height: 30px;
+  top: 5%;
+  right: -5%;
+  height: 25%;
+  width: 25%;
   cursor: pointer;
 }
 
 .edit-icon {
   position: absolute;
-  top: -3.4%;
-  right: 20px;
+  top: 40%;
+  right: -3%;
+  height: 20%;
+  width: 20%;
   cursor: pointer;
 }
 
@@ -554,6 +558,13 @@ textarea::placeholder {
   padding: 0;
 }
 
+.cat-listing-item {
+  padding: 5px 5px -5px 5px;
+  margin-top: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+}
+
 .cat-listing {
   position: relative;
   display: flex;
@@ -567,8 +578,10 @@ textarea::placeholder {
 }
 
 .cat-listing-img {
-  width: 30%;
-  height: 100px;
+  width: 27%;
+  height: 90px;
+  margin-left: 10px;
+  border: 0.15rem solid rgba(50, 50, 50, 0.5);
   border-radius: 1.5rem;
   object-fit: cover;
 }
@@ -604,24 +617,25 @@ textarea::placeholder {
 }
 
 .cat-listing-price {
+  display: flex;
   margin-top: 0.5rem;
   font-weight: 600;
   font-size: 1.1rem;
   color: #00cc66;
   margin-bottom: 0;
-  display: flex;
   align-items: center;
 }
 
 .cat-listing-info-div {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   max-width: 275px;
 }
 
 .cat-listing-info-txt {
   font-weight: 500;
   font-size: 0.7rem;
+  padding: 0 10px;
 }
 
 .load-more {
@@ -717,10 +731,10 @@ textarea::placeholder {
 
 .listing-price {
   margin: 0.5rem 0;
-  color: #09b35e;
+  color: #33bb14;
   font-weight: 700;
   font-size: 1.5rem;
-  text-shadow: 0.5px 0.5px 4px rgba(255, 255, 255, 0.3);
+  /* text-shadow: 0.5px 0.5px 4px rgba(255, 255, 255, 0.3); */
 }
 
 .listing-discount-price {
