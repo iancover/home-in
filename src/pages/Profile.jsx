@@ -105,12 +105,16 @@ function Profile() {
   const onDelete = async (listingId) => {
     if (window.confirm('Are you sure you want to delete listing?')) {
       await deleteDoc(doc(db, 'listings', listingId));
-      const updatedListings = listings.filter((listing) => listing.id !== listingId);
+      const updatedListings = listings.filter(
+        (listing) => listing.id !== listingId
+      );
       setListings(updatedListings);
       toast.success('Deleted listing.');
     }
   };
-  //  const onEdit = (listingId) => {}
+
+  // edit listing
+  const onEdit = (listingId) => navigate(`/edit-listing/${listingId}`);
 
   if (loading) {
     return <Spinner />;
@@ -144,7 +148,9 @@ function Profile() {
               type='text'
               id='name'
               value={name}
-              className={!changeDetails ? 'profile-name' : 'profile-name-active'}
+              className={
+                !changeDetails ? 'profile-name' : 'profile-name-active'
+              }
               disabled={!changeDetails}
               onChange={onChange}
             />
@@ -152,7 +158,9 @@ function Profile() {
               type='text'
               id='email'
               value={email}
-              className={!changeDetails ? 'profile-email' : 'profile-email-active'}
+              className={
+                !changeDetails ? 'profile-email' : 'profile-email-active'
+              }
               disabled={!changeDetails}
               onChange={onChange}
             />
@@ -175,6 +183,7 @@ function Profile() {
                   listing={listing.data}
                   id={listing.id}
                   onDelete={() => onDelete(listing.id)}
+                  onEdit={() => onEdit(listing.id)}
                 />
               ))}
             </ul>
