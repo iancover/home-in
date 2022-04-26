@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { ReactComponent as DeleteIcon } from '../assets/svg/deleteIcon.svg';
+import { ReactComponent as EditIcon } from '../assets/svg/editIcon.svg';
 import bedIcon from '../assets/svg/bedIcon.svg';
 import bathtubIcon from '../assets/svg/bathtubIcon.svg';
 
-function ListingItem({ listing, id, onDelete }) {
+function ListingItem({ listing, id, onEdit, onDelete }) {
   return (
-    <li>
+    <li className='cat-listing-item'>
       <div className='cat-listing'>
         <div className='cat-listing'>
           <Link
@@ -37,15 +38,13 @@ function ListingItem({ listing, id, onDelete }) {
               <div className='cat-listing-info-div'>
                 <img src={bedIcon} alt='bed' />
                 <p className='cat-listing-info-txt'>
-                  {listing.bedrooms > 1
-                    ? `${listing.bedrooms} Bedrooms`
-                    : '1 Bedroom'}
+                  {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : '1 Bed'}
                 </p>
                 <img src={bathtubIcon} alt='bath' />
                 <p className='cat-listing-info-txt'>
                   {listing.bathrooms > 1
-                    ? `${listing.bathrooms} Bathrooms`
-                    : '1 Bathroom'}
+                    ? `${listing.bathrooms} Baths`
+                    : '1 Bath'}
                 </p>
               </div>
             </div>
@@ -59,6 +58,14 @@ function ListingItem({ listing, id, onDelete }) {
               onClick={() => onDelete(listing.id, listing.name)}
             />
           )}
+
+          {onEdit && (
+            <EditIcon
+              className='edit-icon'
+              fill='rgba(50, 50, 50, .5)'
+              onClick={() => onEdit(id)}
+            />
+          )}
         </div>
       </div>
     </li>
@@ -66,3 +73,5 @@ function ListingItem({ listing, id, onDelete }) {
 }
 
 export default ListingItem;
+
+// DeleteIcon red: fill='rgb(194, 110, 101)'
