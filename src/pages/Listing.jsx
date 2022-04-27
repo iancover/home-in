@@ -88,25 +88,39 @@ function Listing() {
         <a href='#map'>
           <p className='listing-location'>
             {listing.location
-              .match(/(\w+\s[A-z]+\.?\s?)+(?=(,\s([A-z]+\s?)+,\s[A-Z]{2}\s\d{5}))/g)
+              .match(
+                /(\w+\s[A-z]+\.?\s?)+(?=(,\s([A-z]+\s?)+,\s[A-Z]{2}\s\d{5}))/g
+              )
               .toString()}
             <br />
-            {listing.location.match(/([A-Z][a-z]+\s?)+,\s[A-Z]{2}\s\d{5}/g).toString()}
+            {listing.location
+              .match(/([A-Z][a-z]+\s?)+,\s[A-Z]{2}\s\d{5}/g)
+              .toString()}
           </p>
         </a>
 
         <p className='listing-price'>
           ${' '}
           {listing.offer
-            ? listing.discountedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-            : listing.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            ? listing.discountedPrice
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+            : listing.regularPrice
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         </p>
 
-        <p className='listing-type'>For {listing.type === 'rent' ? 'Rent' : 'Sale'}</p>
+        <p className='listing-type'>
+          For {listing.type === 'rent' ? 'Rent' : 'Sale'}
+        </p>
 
         {listing.offer && (
           <p className='listing-discount-price'>
-            ${listing.regularPrice - listing.discountedPrice} discount
+            $
+            {(listing.regularPrice - listing.discountedPrice)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+            discount
           </p>
         )}
 
@@ -147,7 +161,8 @@ function Listing() {
               url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
               className='tile-layer-bg'
             />
-            <Marker position={[listing.geolocation.lat, listing.geolocation.lng]}>
+            <Marker
+              position={[listing.geolocation.lat, listing.geolocation.lng]}>
               <Popup>{listing.location}</Popup>
             </Marker>
           </MapContainer>

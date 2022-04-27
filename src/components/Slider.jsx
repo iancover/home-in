@@ -4,7 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 import { db } from '../firebase.config';
 // Swiper
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 // Component
@@ -61,7 +67,9 @@ function Slider() {
         slidesPerView={1}
         pagination={{ clickable: true }}>
         {listings.map(({ data, id }) => (
-          <SwiperSlide key={id} onClick={() => navigate(`/category/${data.type}/${id}`)}>
+          <SwiperSlide
+            key={id}
+            onClick={() => navigate(`/category/${data.type}/${id}`)}>
             <div
               className='swiper-slide-div'
               style={{
@@ -70,7 +78,15 @@ function Slider() {
               }}>
               <p className='swiper-slide-txt'>{data.name}</p>
               <p className='swiper-slide-price'>
-                ${data.discountedPrice ?? data.regularPrice} {data.type === 'rent' && '/ month'}
+                $
+                {data.discountedPrice
+                  ? data.discountedPrice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                  : data.regularPrice
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+                {data.type === 'rent' && '/ month'}
               </p>
             </div>
           </SwiperSlide>
