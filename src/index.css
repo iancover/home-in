@@ -58,6 +58,21 @@ button {
   cursor: pointer;
 }
 
+.btn-secondary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  padding: 0.85rem 2rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #ffffff;
+  background: rgb(194, 110, 101);
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
   display: block;
@@ -610,7 +625,7 @@ textarea::placeholder {
 
 .cat-listing-name {
   margin: 0;
-  width: 90%;
+  width: 80%;
   font-size: 1.1rem;
   font-weight: 600;
   /* background-color: rgba(0, 0, 0, 0.1); */
@@ -666,7 +681,7 @@ textarea::placeholder {
 }
 
 .create-listing-btn {
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 
 .listing-details {
