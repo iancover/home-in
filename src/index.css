@@ -532,7 +532,7 @@ textarea::placeholder {
 }
 
 .cat-listing-item {
-  margin-top: 5px;
+  margin: 10px 0;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 15px;
 }
@@ -623,7 +623,7 @@ textarea::placeholder {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 500px;
+  /* max-width: 500px; */
   margin-top: 2rem;
   padding: 0.25rem 1rem;
   font-weight: 600;
@@ -835,15 +835,15 @@ textarea::placeholder {
 .profile-details-header {
   display: flex;
   justify-content: space-between;
-  max-width: 500px;
+  /* max-width: 500px; */
 }
 
 .profile-card {
+  /* max-width: 500px; */
+  padding: 1rem;
   background-color: #ffffff;
   border-radius: 1rem;
-  padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.2);
-  max-width: 500px;
 }
 
 .profile-details {
