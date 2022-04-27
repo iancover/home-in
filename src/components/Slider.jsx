@@ -45,6 +45,7 @@ function Slider() {
     return <Spinner />;
   }
 
+  // dont display anything if no listings
   if (listings.length === 0) {
     return <></>;
   }
