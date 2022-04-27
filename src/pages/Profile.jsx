@@ -74,7 +74,7 @@ function Profile() {
     navigate('/');
   };
 
-  // update firebase & firestore
+  // update user firebase & firestore
   const onSubmit = async () => {
     try {
       if (auth.currentUser.displayName !== name) {
