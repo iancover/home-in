@@ -12,11 +12,13 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
           <Link
             to={`/category/${listing.type}/${id}`}
             className='cat-listing-link'>
-            <img
-              src={listing.imageUrls[0]}
-              alt={listing.name}
-              className='cat-listing-img'
-            />
+            <div className='cat-listing-img-div'>
+              <img
+                src={listing.imageUrls[0]}
+                alt={listing.name}
+                className='cat-listing-img'
+              />
+            </div>
             <div className='cat-listing-details'>
               <p className='cat-listing-location'>
                 {listing.location
