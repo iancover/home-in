@@ -75,6 +75,10 @@ function Listing() {
         ))}
       </Swiper>
 
+      <button type='button' className='back-btn' onClick={() => navigate(-1)}>
+        Back
+      </button>
+
       <div
         className='share-icon-div'
         onClick={() => {
