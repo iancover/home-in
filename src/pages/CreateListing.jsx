@@ -17,15 +17,19 @@ import { v4 as uuidv4 } from 'uuid';
 // Components
 import Spinner from '../components/Spinner';
 
+
+/**
+ * @desc Create listing in Firebase firestore using Geolocation API and store imgs & URLs
+ * @public /create-listing
+ * @see Profile
+ */
 function CreateListing() {
   // eslint-disable-next-line
   const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   // set 'useState(false)' to disable geolocation and avoid api usage
 
-  // spinner stop/start
+  // states: spinner, form data
   const [loading, setLoading] = useState(false);
-
-  // data
   const [formData, setFormData] = useState({
     type: 'rent',
     name: '',
@@ -57,9 +61,12 @@ function CreateListing() {
     longitude,
   } = formData;
 
-  // firebase auth user redirect & handle state of unmounted comp
+  // init Firebase auth
   const auth = getAuth();
+  // to redirect to sign in
   const navigate = useNavigate();
+
+  // Auth user before mounting component
   const isMounted = useRef(true);
   useEffect(() => {
     if (isMounted) {
@@ -77,25 +84,22 @@ function CreateListing() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted]);
 
-  // form submit
+  // Form submit
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     // price check
     if (discountedPrice >= regularPrice) {
       setLoading(false);
       toast.error('Discounted price needs to be less than regular price');
       return;
     }
-
     // max upload
     if (images.length > 6) {
       setLoading(false);
       toast.error('Max 6 images');
       return;
     }
-
     // Geocoding API request
     let geolocation = {};
     let location;
@@ -105,9 +109,7 @@ function CreateListing() {
       const response = await fetch(
         `${geocodeURL}?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
       );
-
       const data = await response.json();
-
       geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
       geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
       //  'optional chaining ?' operator on 'results[0]?.geometry..' to avoid error
@@ -117,8 +119,6 @@ function CreateListing() {
         data.status === 'ZERO_RESULTS'
           ? undefined
           : data.results[0]?.formatted_address;
-
-      console.log(data);
 
       if (location === undefined || location.includes('undefined')) {
         setLoading(false);

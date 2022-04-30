@@ -9,18 +9,25 @@ import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRig
 // Components
 import OAuth from '../components/OAuth';
 
-function SignIn() {
-  const [showPwd, setShowPwd] = useState(false);
 
-  // clear input values
+/**
+ * @desc Auth existing user & redirect home
+ * @public /sign-in
+ * @see OAuth
+ */
+function SignIn() {
+  // states: view pwd, input values
+  const [showPwd, setShowPwd] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     pwd: '',
   });
-
   const { email, pwd } = formData;
+
+  // to redirect home
   const navigate = useNavigate();
 
+  // input typing display real-time
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -28,28 +35,21 @@ function SignIn() {
     }));
   };
 
+  // Auth user with Firebase credentials & redirect home
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    // firebase: sign in user
     try {
-      // 1. init auth middleware
       const auth = getAuth();
-
-      // 2. sign in user
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         pwd
       );
-
-      // 3. go home if user auth or log error
       if (userCredential.user) {
         navigate('/');
       }
     } catch (error) {
-      // console.log(error);
-      toast.error('Bad User Credentials');
+      toast.error('Enter valid email & password, or Sign Up.');
     }
   };
 
@@ -100,6 +100,7 @@ function SignIn() {
           </div>
         </form>
 
+        {/* Google OAuth */}
         <OAuth />
 
         <Link to='/sign-up' className='register-link'>
@@ -112,10 +113,3 @@ function SignIn() {
 
 export default SignIn;
 
-// NOTES:
-// [e.target.id]: e.target.value
-// do this to pass the value based on input id, 'email' or 'pwd'
-//    email: john@email.com
-
-// FIREBASE > DOCS > BUILD > AUTH > WEB
-// https://firebase.google.com/docs/auth/web/start#sign_in_existing_users

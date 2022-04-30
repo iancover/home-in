@@ -15,31 +15,39 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 // Component
 import Spinner from './Spinner';
-
-// Swiper Modules Enable
+// Swiper: enable modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
+
+/**
+ * @desc Swiper component to display listings cover images and details
+ * @see Explore 
+ */
 function Slider() {
   const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState(null);
 
+  // to goto listing on img click
   const navigate = useNavigate();
 
+  // Fetch listings from Firebase
   useEffect(() => {
     const fetchListings = async () => {
+      // create ref
       const listingsRef = collection(db, 'listings');
+      // build query
       const q = query(listingsRef, orderBy('timestamp', 'desc'), limit(5));
+      // query docs
       const querySnap = await getDocs(q);
-
+      // create listings array to pass as state
       let listings = [];
-
       querySnap.forEach((doc) => {
         return listings.push({
           id: doc.id,
           data: doc.data(),
         });
       });
-
+      // set states
       setListings(listings);
       setLoading(false);
     };
@@ -97,3 +105,7 @@ function Slider() {
 }
 
 export default Slider;
+
+/**
+ * onClick the SwiperSlide navigates to listing displayed
+ */

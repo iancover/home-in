@@ -1,11 +1,16 @@
 import { useEffect, useState, useRef } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
+/**
+ * @desc Custom hook to auth current user with Firebase
+ * @see PrivateRoute
+ */
 export const useAuthStatus = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [checkStatus, setCheckStatus] = useState(true);
-  const isMounted = useRef(true);
 
+  // To update unmounted component
+  const isMounted = useRef(true);
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -14,7 +19,6 @@ export const useAuthStatus = () => {
       }
       setCheckStatus(false);
     });
-
     return () => {
       isMounted.current = false;
     };
@@ -24,8 +28,8 @@ export const useAuthStatus = () => {
 };
 
 // NOTES
-// Custom hook which uses Firebase fn to handle auth state
-// to be able to redirect auth user to <Profile>
+// Custom hook which uses Firebase middleware to handle auth state
+// everytime current user navigates to /profile
 // 'useEffect()'
 // using 'useRef' hook with isMounted and returning it
 // fixes memory leak error that happens on trying

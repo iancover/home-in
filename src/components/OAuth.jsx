@@ -11,17 +11,24 @@ import { toast } from 'react-toastify';
 // Icons
 import googleIcon from '../assets/svg/googleIcon.svg';
 
+
+/**
+ * @desc Authentication using Google account
+ * @see SignIn
+ * @see SignUp
+ */
 function OAuth() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Google OAuth popup verify or create new user
   const onGoogleClick = async () => {
     try {
+      // Sign in or verify existing user w/Firebase & Google OAuth
       const auth = getAuth();
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      
       const docRef = doc(db, 'users', user.uid);
       const docSnap = await getDoc(docRef);
       if (!docSnap.exists()) {
@@ -49,13 +56,12 @@ function OAuth() {
 
 export default OAuth;
 
-// NOTES:
-//  onGoogleClick:
-//    1. init Firebase auth
-//    2. init Google provider
-//    3. init sign in popup
-//    4. & make resulting user the 'user'
-//    5. ref the db -> users collection for user
-//    6. pass to a doc snapshot
-//    7. check if user exists, if not create it & timestamp it
-//    8. navigate home & log error
+/**
+ * onGoogleClick
+ * 1. init Firestore auth
+ * 2. init Google Auth provider 
+ * 3. sign in using Google popup window to select gmail acct
+ * 4. ref users db collection w/user id
+ * 5. if user doesn't exist create w/Google credentials
+ * 6. or navigate home
+ */

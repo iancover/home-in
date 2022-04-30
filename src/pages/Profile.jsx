@@ -22,9 +22,14 @@ import homeIcon from '../assets/svg/homeIcon.svg';
 import Spinner from '../components/Spinner';
 import ListingItem from '../components/ListingItem';
 
+
+/**
+ * @desc User details, new listing & display created listings
+ * @private /profile
+ */
 function Profile() {
   const auth = getAuth();
-  // states: spinner, listings, details, form data
+  // states: spinner, listings, user details & input data
   const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState(null);
   const [changeDetails, setChangeDetails] = useState(false);
@@ -32,24 +37,26 @@ function Profile() {
     name: auth.currentUser.displayName,
     email: auth.currentUser.email,
   });
-
   const { name, email } = formData;
 
+  // to redirect home
   const navigate = useNavigate();
 
-  // fetch listings from Firebase
+  // Fetch listings from Firebase
   useEffect(() => {
     const fetchUserListings = async () => {
       try {
-        // build query
+        // ref db collection
         const listingsRef = collection(db, 'listings');
+        // build query
         const q = query(
           listingsRef,
           where('userRef', '==', auth.currentUser.uid),
           orderBy('timestamp', 'desc')
         );
-        // get listings data
+        // query docs
         const querySnap = await getDocs(q);
+        // create array to map listings state into ListingItem
         const listings = [];
         querySnap.forEach((doc) => {
           return listings.push({
@@ -57,7 +64,7 @@ function Profile() {
             data: doc.data(),
           });
         });
-        // set state listings
+        // set states
         setListings(listings);
         setLoading(false);
       } catch (error) {
@@ -68,20 +75,19 @@ function Profile() {
     fetchUserListings();
   }, [auth.currentUser.uid]);
 
-  // logout & redirect home
+  // Logout & redirect home
   const onLogout = () => {
     auth.signOut();
     navigate('/');
   };
 
-  // update user firebase & firestore
+  // Update user in Firebase
   const onSubmit = async () => {
     try {
       if (auth.currentUser.displayName !== name) {
         await updateProfile(auth.currentUser, {
           displayName: name,
         });
-
         const userRef = doc(db, 'users', auth.currentUser.uid);
         await updateDoc(userRef, {
           name,
@@ -93,7 +99,7 @@ function Profile() {
     }
   };
 
-  // update data on input typing
+  // Input typing display real-time
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -101,7 +107,7 @@ function Profile() {
     }));
   };
 
-  // delete listing
+  // Delete listing
   const onDelete = async (listingId) => {
     if (window.confirm('Are you sure you want to delete listing?')) {
       await deleteDoc(doc(db, 'listings', listingId));
@@ -113,7 +119,7 @@ function Profile() {
     }
   };
 
-  // edit listing
+  // Edit listing
   const onEdit = (listingId) => navigate(`/edit-listing/${listingId}`);
 
   if (loading) {
@@ -196,25 +202,8 @@ function Profile() {
 
 export default Profile;
 
-// useEffect: fetch listings from firestore
-// -  Build a listings reference to collection
-// -  Build a query with listings ref specifying to only get
-//    listings linked to 'userRef'
-// -  Create array of listings passing id & data
-// -  Set listings as state to send data to ListingItem
-//    if 'listings' array > 0 display ListingItem
-//
-// changeDetails state:
-// -  To toggle between 'done/change' to change user details
-// -  To enable/disable inputs to type
-//
-// onChange:
-// -  To update input text as user types
-//
-// onClick:
-// -  Toggles the 'done/change' to change the user's details
-// -  if 'changeDetails == true' runs 'onSubmit()' & toggles text to 'done'
-//
-// onSubmit:
-// -  Sends input data to update the user's display name in Firestore
-// -  'onChange' only updates session display name when user types
+/**
+ * onClick
+ * Toggles 'done' & 'change' text to display, e.g. if 'changeDetails' == true
+ * onSubmit updates user name in Firebase and toggles to 'done'.
+ */

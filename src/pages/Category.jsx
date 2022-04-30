@@ -17,6 +17,12 @@ import { toast } from 'react-toastify';
 import ListingItem from '../components/ListingItem';
 import Spinner from '../components/Spinner';
 
+
+
+/**
+ * @desc Fetch & display listings from Firebase by type: rent/sale
+ * @public /category/:categoryName
+ */
 function Category() {
   // states: listing, spinner, fetch more listings & display count
   const [listings, setListings] = useState(null);
@@ -25,15 +31,16 @@ function Category() {
   // eslint-disable-next-line no-unused-vars
   const [listingsCountDisplay, setListingsCountDisplay] = useState(null);
 
-  // to pass listing type
+  // to get listing type from URL
   const params = useParams();
 
-  // fetch listings from Firebase
+  // Fetch initial listings 
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        // listings ref & query & get docs
+        // ref collection
         const listingsRef = collection(db, 'listings');
+        // build query w/limit
         const fetchLimit = 4;
         const q = query(
           listingsRef,
@@ -41,9 +48,9 @@ function Category() {
           orderBy('timestamp', 'desc'),
           limit(fetchLimit)
         );
+        // query docs
         const querySnap = await getDocs(q);
-
-        // listings array
+        // array to map listings state into ListingItem
         const listings = [];
         querySnap.forEach((doc) => {
           return listings.push({
@@ -51,7 +58,6 @@ function Category() {
             data: doc.data(),
           });
         });
-
         // to load more listings
         if (listings.length <= fetchLimit - 1) {
           console.log('Fetched all available listings.');
@@ -60,7 +66,6 @@ function Category() {
           setLastFetchedListing(querySnap.docs.pop());
           listings.pop();
         }
-
         // set states
         setListings(listings);
         setListingsCountDisplay(listings.length);
@@ -69,16 +74,16 @@ function Category() {
         toast.error('Could not fetch listings');
       }
     };
-
     fetchListings();
   }, [params.categoryName]);
 
-  // more listings from Firebase
+  // Fetch more listings on user action
   const onFetchMoreListings = async (e) => {
     try {
-      // listings ref & query & get docs
+      // ref collection
       const listingsRef = collection(db, 'listings');
-      const fetchLimit = 11;
+      // build query w/limit & starting from last
+      const fetchLimit = 4;
       const q = query(
         listingsRef,
         where('type', '==', params.categoryName),
@@ -86,9 +91,10 @@ function Category() {
         startAt(lastFetchedListing),
         limit(fetchLimit)
       );
+      // query docs
       const querySnap = await getDocs(q);
 
-      // listings array & state to pass in ListingItem
+      // array to map listings state into ListingItem
       const listings = [];
       querySnap.forEach((doc) => {
         return listings.push({
@@ -105,11 +111,11 @@ function Category() {
         setLastFetchedListing(querySnap.docs.pop());
         listings.pop();
       }
-
       // set states
       setListings((prevState) => [...prevState, ...listings]);
       setListingsCountDisplay((prevState) => prevState + listings.length);
       setLoading(false);
+      // scroll to Load More
       e.target.scrollIntoView({ behavior: 'smooth' });
     } catch (error) {
       toast.error('Could not fetch more listings.');

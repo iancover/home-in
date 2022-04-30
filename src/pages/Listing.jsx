@@ -14,25 +14,31 @@ import { db } from '../firebase.config';
 import Spinner from '../components/Spinner';
 // Icons
 import shareIcon from '../assets/svg/shareIcon.svg';
-
-// Swiper Modules Enable
+// Swiper: enable modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
+/**
+ * @desc Full listing info with image Slider & Map objects, and copy link & contact buttons
+ * @public /category/:categoryName/:listingId
+ * @see Slider
+ * @see Contact
+ */
 function Listing() {
+  // states: listing data, spinner & copy link
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [shareLinkCopied, setShareLinkCopied] = useState(false);
 
+  // to get category type & listing Id
   const params = useParams();
   const navigate = useNavigate();
   const auth = getAuth();
 
-  // get data
+  // Fetch listings from Firebase
   useEffect(() => {
     const fetchListing = async () => {
       const docRef = doc(db, 'listings', params.listingId);
       const docSnap = await getDoc(docRef);
-
       if (docSnap.exists()) {
         setListing(docSnap.data());
         setLoading(false);

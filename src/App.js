@@ -33,28 +33,33 @@ function App() {
           <Route path='/create-listing' element={<CreateListing />} />
           <Route path='/edit-listing/:listingId' element={<EditListing />} />
           <Route path='/category/:categoryName' element={<Category />} />
-          <Route path='/category/:categoryName/:listingId' element={<Listing />} />
+          <Route
+            path='/category/:categoryName/:listingId'
+            element={<Listing />}
+          />
           <Route path='/contact/:landlordId' element={<Contact />} />
         </Routes>
         <Navbar />
       </Router>
 
       <ToastContainer />
+      {/* 
+        Default Toastify Container
+        <ToastContainer
+          position='top-right'
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      */}
     </>
   );
 }
 
 export default App;
 
-// REACT TOASTIFY CONTAINER DEFAULT ATTRIBUTES
-// <ToastContainer
-//   position='top-right'
-//   autoClose={5000}
-//   hideProgressBar={false}
-//   newestOnTop={false}
-//   closeOnClick
-//   rtl={false}
-//   pauseOnFocusLoss
-//   draggable
-//   pauseOnHover
-// />

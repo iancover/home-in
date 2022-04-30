@@ -16,6 +16,12 @@ import { v4 as uuidv4 } from 'uuid';
 // Components
 import Spinner from '../components/Spinner';
 
+
+/**
+ * @desc Form data to update listing or redirect home unauth users
+ * @public /edit-listing/:listingId
+ * @see CreateListing : similar but uses Firebase firestore's 'udpateDoc' fn
+ */
 function EditListing() {
   // states: enable/disable Geocoding API, spinner, input data
   const [geolocationEnabled, setGeolocationEnabled] = useState(true); // 'false' disables api
@@ -66,7 +72,7 @@ function EditListing() {
     }
   });
 
-  // fetch listing to edit & prefill form 
+  // Fetch listing to edit & prefill form
   useEffect(() => {
     setLoading(true);
     const fetchListing = async () => {
@@ -85,7 +91,7 @@ function EditListing() {
     fetchListing();
   }, [params.listingId, navigate]);
 
-  // set userRef to logged in user
+  // Set userRef to logged in user
   useEffect(() => {
     if (isMounted) {
       onAuthStateChanged(auth, (user) => {
@@ -102,7 +108,7 @@ function EditListing() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted]);
 
-  // form submit
+  // Form submit
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -222,7 +228,7 @@ function EditListing() {
     navigate(`/category/${formDataCopy.type}/${docRef.id}`);
   };
 
-  // handle input values
+  // Handle input values
   const onMutate = (e) => {
     let boolean = null;
 
@@ -497,9 +503,10 @@ function EditListing() {
 
 export default EditListing;
 
-// NOTES
-//
-//  'optional chaining ?' operator on 'results[0]?.geometry..' to avoid error
-//  'nullish coalescing ??' operator to return '0' if lat/lng = null/undefined
-//   giving the option to get 'geometry.location...' is available
-//   and if undefined, returns 0
+/**
+ * NOTES:
+ *  'optional chaining ?' operator on 'results[0]?.geometry..' to avoid error
+ *  'nullish coalescing ??' operator to return '0' if lat/lng = null/undefined
+ *   giving the option to get 'geometry.location...' is available
+ *   and if undefined, returns 0
+ */

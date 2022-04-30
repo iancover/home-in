@@ -16,18 +16,25 @@ import { toast } from 'react-toastify';
 import ListingItem from '../components/ListingItem';
 import Spinner from '../components/Spinner';
 
+
+/**
+ * @desc Display all listings with discounted price 'listing.offer == true'
+ * @public /offers
+ */
 function Offers() {
+  // states
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lastFetchedListing, setLastFetchedListing] = useState(null);
   const [listingsCountDisplay, setListingsCountDisplay] = useState(null);
 
-  // fetch offer listings from Firebase
+  // Fetch listings from Firebase
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        // listings ref & query & get docs
+        // listings ref
         const listingsRef = collection(db, 'listings');
+        // build query
         const fetchLimit = 4;
         const q = query(
           listingsRef,
@@ -35,9 +42,10 @@ function Offers() {
           orderBy('timestamp', 'desc'),
           limit(fetchLimit)
         );
+        // query docs
         const querySnap = await getDocs(q);
 
-        // listings array
+        // listings array to pass as state into ListingItem
         const listings = [];
         querySnap.forEach((doc) => {
           return listings.push({
@@ -67,11 +75,12 @@ function Offers() {
     fetchListings();
   }, []);
 
-  // more offer listings from Firebase
+  // Fetch more listing on user action
   const onFetchMoreListings = async (e) => {
     try {
-      // listings ref & query & get docs
+      // listings ref
       const listingsRef = collection(db, 'listings');
+      // build query
       const fetchLimit = 4;
       const q = query(
         listingsRef,
@@ -80,6 +89,7 @@ function Offers() {
         startAt(lastFetchedListing),
         limit(fetchLimit)
       );
+      // query docs
       const querySnap = await getDocs(q);
 
       // listings array & state to pass in ListingItem

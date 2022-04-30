@@ -3,10 +3,16 @@ import { ReactComponent as OfferIcon } from '../assets/svg/localOfferIcon.svg';
 import { ReactComponent as ExploreIcon } from '../assets/svg/exploreIcon.svg';
 import { ReactComponent as PersonOutlineIcon } from '../assets/svg/personOutlineIcon.svg';
 
+
+/**
+ * @desc Bottom navigation to Explore, Offers and auth user Profile
+ * @see Routes in /App.js
+ */
 function Navbar() {
   const navigate = useNavigate();
-  const location = useLocation();
 
+  // to highlight color of current route
+  const location = useLocation();
   const pathMatchRoute = (route) => {
     if (route === location.pathname) {
       return true;

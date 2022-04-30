@@ -15,19 +15,25 @@ import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRig
 // Components
 import OAuth from '../components/OAuth';
 
-function SignUp() {
-  const [showPwd, setShowPwd] = useState(false);
 
-  // clear input values
+/**
+ * @desc Create new user in Firebase w/credentials or Google OAuth
+ * @public /sign-up
+ * @see OAuth
+ */
+function SignUp() {
+  // states: view pwd & input values
+  const [showPwd, setShowPwd] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     pwd: '',
   });
-
   const { name, email, pwd } = formData;
+  // 
   const navigate = useNavigate();
 
+  // Input typing real-time display
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -35,11 +41,11 @@ function SignUp() {
     }));
   };
 
-  // Create user w/email & pwd in Firebase & go home
+  // Create user w/Firebase auth & redirect home
   const onSubmit = async (e) => {
     e.preventDefault();
-
     try {
+      // auth user w/email & pwd encryption
       const auth = getAuth();
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -50,14 +56,15 @@ function SignUp() {
       updateProfile(auth.currentUser, {
         displayName: name,
       });
+      // store user details without pwd
       const formDataCopy = { ...formData };
       delete formDataCopy.pwd;
       formDataCopy.timestamp = serverTimestamp();
       await setDoc(doc(db, 'users', user.uid), formDataCopy);
-
+      
+      // redirect home
       navigate('/');
     } catch (error) {
-      // console.log(error);
       toast.error('Registration Error! Please Try Again');
     }
   };
@@ -114,6 +121,7 @@ function SignUp() {
           </div>
         </form>
 
+        {/* Google OAuth btn */}
         <OAuth />
 
         <Link to='/sign-in' className='register-link'>
@@ -126,13 +134,3 @@ function SignUp() {
 
 export default SignUp;
 
-// NOTES
-// onSubmit:
-//  Create new user in Firebase with Email & Pwd
-//  1. init auth middleware
-//  2. create user w/email & pwd credentials
-//  3. init 'user' obj
-//  4. update profile name w/current auth user
-//  5. create copy of user to add to db without pwd
-//  6. log server timestamp & set doc to 'users' db collection w/uid
-//  7. go home and/or log error

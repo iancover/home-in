@@ -4,6 +4,13 @@ import { ReactComponent as EditIcon } from '../assets/svg/editIcon.svg';
 import bedIcon from '../assets/svg/bedIcon.svg';
 import bathtubIcon from '../assets/svg/bathtubIcon.svg';
 
+
+/**
+ * @desc Display brief listing data to display list of listings
+ * @see Category
+ * @see Offers
+ * @see Profile onEdit & onDelete available
+ */
 function ListingItem({ listing, id, onEdit, onDelete }) {
   return (
     <li className='cat-listing-item'>
@@ -76,4 +83,4 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
 
 export default ListingItem;
 
-// DeleteIcon red: fill='rgb(194, 110, 101)'
+

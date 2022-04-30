@@ -4,19 +4,25 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import { toast } from 'react-toastify';
 
+/**
+ * @desc Message listing owner 'Landlord' with default email
+ * @public /contact/:landlordId
+ * @see Listing
+ */
 function Contact() {
   const [message, setMessage] = useState('');
   const [landlord, setLandlord] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // to get listing owner 'landlord' id
   const params = useParams();
 
+  // Fetch listing creator 'landlordId == listing.userRef'
   useEffect(() => {
     const getLandlord = async () => {
       const docRef = doc(db, 'users', params.landlordId);
       const docSnap = await getDoc(docRef);
-
       if (docSnap.exists()) {
         setLandlord(docSnap.data());
       } else {

@@ -5,6 +5,12 @@ import Slider from '../components/Slider';
 import rentCategoryImage from '../assets/jpg/rentCategoryImage.jpg';
 import sellCategoryImage from '../assets/jpg/sellCategoryImage.jpg';
 
+
+/**
+ * @desc Slider auto displaying Recommended listings & Categories 
+ * @public /
+ * @see Category
+ */
 function Explore() {
   return (
     <div className='explore'>
@@ -14,15 +20,22 @@ function Explore() {
 
       <main>
         <Slider />
-
         <p className='explore-cat-heading'>Categories</p>
         <div className='explore-cats'>
           <Link to='/category/rent'>
-            <img src={rentCategoryImage} alt='rent' className='explore-cat-img' />
+            <img
+              src={rentCategoryImage}
+              alt='rent'
+              className='explore-cat-img'
+            />
             <p className='explore-cat-name'>Places for Rent</p>
           </Link>
           <Link to='/category/sale'>
-            <img src={sellCategoryImage} alt='sale' className='explore-cat-img' />
+            <img
+              src={sellCategoryImage}
+              alt='sale'
+              className='explore-cat-img'
+            />
             <p className='explore-cat-name'>Places for Sale</p>
           </Link>
         </div>
