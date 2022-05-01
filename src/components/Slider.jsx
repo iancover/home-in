@@ -66,7 +66,7 @@ function Slider() {
 
   return (
     <>
-      <p className='explore-heading'>Recommended</p>
+      <p className='pg-heading-2'>Recommended</p>
 
       <Swiper
         loop={true}

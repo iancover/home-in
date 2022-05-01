@@ -121,9 +121,9 @@ function Offers() {
   };
 
   return (
-    <div className='category'>
+    <div className='offers-pg'>
       <header>
-        <p className='pg-header'>Offers</p>
+        <p className='pg-heading-1'>Offers</p>
       </header>
 
       {loading ? (
@@ -131,12 +131,12 @@ function Offers() {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <span className='listings-displayed'>
+            <span className='listings-count'>
               <strong>{listingsCountDisplay && listingsCountDisplay}</strong>{' '}
               Listings
             </span>
 
-            <ul className='cat-listings'>
+            <ul className='offers-listings'>
               {listings.map((listing) => (
                 <ListingItem
                   listing={listing.data}
@@ -146,9 +146,8 @@ function Offers() {
               ))}
             </ul>
             <br />
-            <br />
             {lastFetchedListing && (
-              <p className='load-more' onClick={(e) => onFetchMoreListings(e)}>
+              <p className='listings-load-more' onClick={(e) => onFetchMoreListings(e)}>
                 Load More
               </p>
             )}

@@ -73,7 +73,7 @@ function SignUp() {
     <>
       <div className='pg-container'>
         <header>
-          <p className='pg-header'>Welcome</p>
+          <p className='pg-heading-1'>Welcome</p>
         </header>
 
         <form onSubmit={onSubmit}>

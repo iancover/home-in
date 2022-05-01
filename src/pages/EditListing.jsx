@@ -260,7 +260,7 @@ function EditListing() {
   return (
     <div className='profile'>
       <header>
-        <p className='pg-header'>Edit Listing</p>
+        <p className='pg-heading-1'>Edit Listing</p>
       </header>
       <main>
         <form onSubmit={onSubmit}>

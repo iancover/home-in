@@ -13,30 +13,30 @@ import sellCategoryImage from '../assets/jpg/sellCategoryImage.jpg';
  */
 function Explore() {
   return (
-    <div className='explore'>
+    <div className='explore-pg'>
       <header>
-        <p className='pg-header'>Explore</p>
+        <p className='pg-heading-1'>Explore</p>
       </header>
 
       <main>
         <Slider />
-        <p className='explore-cat-heading'>Categories</p>
-        <div className='explore-cats'>
+        <p className='pg-heading-2'>Categories</p>
+        <div className='explore-categories-div'>
           <Link to='/category/rent'>
             <img
               src={rentCategoryImage}
               alt='rent'
-              className='explore-cat-img'
+              className='explore-categories-img'
             />
-            <p className='explore-cat-name'>Places for Rent</p>
+            <p className='pg-heading-4'>Places for Rent</p>
           </Link>
           <Link to='/category/sale'>
             <img
               src={sellCategoryImage}
               alt='sale'
-              className='explore-cat-img'
+              className='explore-categories-img'
             />
-            <p className='explore-cat-name'>Places for Sale</p>
+            <p className='pg-heading-4'>Places for Sale</p>
           </Link>
         </div>
       </main>

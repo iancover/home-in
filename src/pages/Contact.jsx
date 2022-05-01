@@ -36,20 +36,18 @@ function Contact() {
   const onChange = (e) => setMessage(e.target.value);
 
   return (
-    <div className='pg-container'>
+    <div className='contact-pg'>
       <header>
-        <p className='pg-header'>Contact Landlord</p>
+        <p className='pg-heading-1'>Contact Landlord</p>
       </header>
 
       {landlord !== null && (
         <main>
-          <div className='contact-landlord'>
-            <p className='landlord-name'>{landlord?.name}</p>
-          </div>
+          <p className='contact-landlord-name'>{landlord?.name}</p>
 
-          <form className='msg-form'>
-            <div className='msg-div'>
-              <label htmlFor='message' className='msg-label'>
+          <form className='contact-msg-form'>
+            <div className='contact-msg-div'>
+              <label htmlFor='message' className='contact-msg-label'>
                 Message
               </label>
               <textarea
@@ -57,6 +55,7 @@ function Contact() {
                 id='message'
                 value={message}
                 className='textarea'
+                rows={10}
                 onChange={onChange}></textarea>
             </div>
 

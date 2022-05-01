@@ -13,27 +13,27 @@ import bathtubIcon from '../assets/svg/bathtubIcon.svg';
  */
 function ListingItem({ listing, id, onEdit, onDelete }) {
   return (
-    <li className='cat-listing-item'>
-      <div className='cat-listing'>
-        <div className='cat-listing'>
+    <li className='list-item'>
+      <div className='list-item-div'>
+        <div className='list-item-div'>
           <Link
             to={`/category/${listing.type}/${id}`}
-            className='cat-listing-link'>
-            <div className='cat-listing-img-div'>
+            className='list-item-link'>
+            <div className='list-item-img-div'>
               <img
                 src={listing.imageUrls[0]}
                 alt={listing.name}
-                className='cat-listing-img'
+                className='list-item-img'
               />
             </div>
-            <div className='cat-listing-details'>
-              <p className='cat-listing-location'>
+            <div className='list-item-details'>
+              <p className='list-item-location'>
                 {listing.location
                   .match(/([A-Z][a-z]+\s?)+,\s[A-Z]{2}/g)
                   .toString()}
               </p>
-              <p className='cat-listing-name'>{listing.name}</p>
-              <p className='cat-listing-price'>
+              <p className='list-item-name'>{listing.name}</p>
+              <p className='list-item-price'>
                 ${' '}
                 {listing.offer
                   ? listing.discountedPrice
@@ -44,13 +44,13 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 {listing.type === 'rent' && ' / Month'}
               </p>
-              <div className='cat-listing-info-div'>
+              <div className='list-item-info-div'>
                 <img src={bedIcon} alt='bed' />
-                <p className='cat-listing-info-txt'>
+                <p className='list-item-info'>
                   {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : '1 Bed'}
                 </p>
                 <img src={bathtubIcon} alt='bath' />
-                <p className='cat-listing-info-txt'>
+                <p className='list-item-info'>
                   {listing.bathrooms > 1
                     ? `${listing.bathrooms} Baths`
                     : '1 Bath'}

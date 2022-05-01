@@ -22,6 +22,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
  * @public /category/:categoryName/:listingId
  * @see Slider
  * @see Contact
+ * @see CreateListing 
  */
 function Listing() {
   // states: listing data, spinner & copy link
@@ -80,7 +81,7 @@ function Listing() {
       </button>
 
       <div
-        className='share-icon-div'
+        className='listing-copy-link'
         onClick={() => {
           navigator.clipboard.writeText(window.location.href);
           setShareLinkCopied(true);
@@ -93,10 +94,10 @@ function Listing() {
 
       {shareLinkCopied && <p className='link-copied'>Link Copied!</p>}
 
-      <div className='listing-details'>
+      <div className='listing-pg'>
         <p className='listing-name'>{listing.name}</p>
         <a href='#map'>
-          <p className='listing-location'>
+          <p className='listing-address'>
             {listing.location
               .match(
                 /(\w+\s[A-z]+\.?\s?)+(?=(,\s([A-z]+\s?)+,\s[A-Z]{2}\s\d{5}))/g
@@ -125,7 +126,7 @@ function Listing() {
         </p>
 
         {listing.offer && (
-          <p className='listing-discount-price'>
+          <p className='listing-discount'>
             $
             {(listing.regularPrice - listing.discountedPrice)
               .toString()
@@ -134,31 +135,31 @@ function Listing() {
           </p>
         )}
 
-        <div className='listing-details-list'>
+        <div className='listing-info-list'>
           <div>
-            <p className='listing-details-item'>
-              <strong className='list-dot'>&middot;</strong>{' '}
+            <p className='listing-info-item'>
+              <strong className='listing-info-item-dot'>&middot;</strong>{' '}
               {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : '1 Bed'}
             </p>
-            <p className='listing-details-item'>
-              <strong className='list-dot'>&middot;</strong>{' '}
+            <p className='listing-info-item'>
+              <strong className='listing-info-item-dot'>&middot;</strong>{' '}
               {listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : '1 Bath'}
             </p>
           </div>
 
           <div>
-            <p className='listing-details-item'>
-              <strong className='list-dot'>&middot;</strong>{' '}
+            <p className='listing-info-item'>
+              <strong className='listing-info-item-dot'>&middot;</strong>{' '}
               {listing.parking ? 'No Parking' : 'No Parking'}
             </p>
-            <p className='listing-details-item'>
-              <strong className='list-dot'>&middot;</strong>{' '}
+            <p className='listing-info-item'>
+              <strong className='listing-info-item-dot'>&middot;</strong>{' '}
               {listing.furnished ? 'Unfurnished' : 'Unfurnished'}
             </p>
           </div>
         </div>
 
-        <p className='listing-location-title'>Location</p>
+        <p className='listing-map-header'>Location</p>
 
         <div className='leaflet-container' id='map'>
           <MapContainer

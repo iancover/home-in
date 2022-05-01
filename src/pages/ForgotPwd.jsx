@@ -35,7 +35,7 @@ function ForgotPwd() {
   return (
     <div className='pg-container'>
       <header>
-        <p className='pg-header'>Forgot Password</p>
+        <p className='pg-heading-1'>Forgot Password</p>
       </header>
 
       <main>

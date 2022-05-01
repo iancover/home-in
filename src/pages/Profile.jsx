@@ -127,19 +127,19 @@ function Profile() {
   }
 
   return (
-    <div className='profile'>
+    <div className='profile-pg'>
       <header className='profile-header'>
-        <p className='pg-header'>{name}</p>
+        <p className='pg-heading-1'>{name}</p>
         <button type='button' className='log-out' onClick={onLogout}>
           Logout
         </button>
       </header>
 
       <main>
-        <div className='profile-details-header'>
-          <p className='profile-details-text'>Personal Details</p>
+        <div className='profile-details'>
+          <p className='pg-heading-3'>Account Details</p>
           <p
-            className='change-personal-details'
+            className='profile-change-details'
             onClick={() => {
               changeDetails && onSubmit();
               setChangeDetails((prevState) => !prevState);
@@ -150,6 +150,7 @@ function Profile() {
 
         <div className='profile-card'>
           <form>
+            <label htmlFor={name}>Name: </label>
             <input
               type='text'
               id='name'
@@ -160,6 +161,7 @@ function Profile() {
               disabled={!changeDetails}
               onChange={onChange}
             />
+            <label htmlFor={name}>Email: </label>
             <input
               type='text'
               id='email'
@@ -182,7 +184,7 @@ function Profile() {
         {!loading && listings?.length > 0 && (
           <>
             <p className='listing-txt'>Your Listings</p>
-            <ul className='listings-list'>
+            <ul className='profile-listings'>
               {listings.map((listing) => (
                 <ListingItem
                   key={listing.id}
