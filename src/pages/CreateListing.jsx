@@ -17,18 +17,14 @@ import { v4 as uuidv4 } from 'uuid';
 // Components
 import Spinner from '../components/Spinner';
 
-
 /**
  * @desc Create listing in Firebase firestore using Geolocation API and store imgs & URLs
  * @public /create-listing
  * @see Profile
  */
 function CreateListing() {
-  // eslint-disable-next-line
+  // states: Geocoding API request, spinner, form data
   const [geolocationEnabled, setGeolocationEnabled] = useState(true);
-  // set 'useState(false)' to disable geolocation and avoid api usage
-
-  // states: spinner, form data
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     type: 'rent',
@@ -106,28 +102,35 @@ function CreateListing() {
     const geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json';
 
     if (geolocationEnabled) {
-      const response = await fetch(
-        `${geocodeURL}?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
-      );
-      const data = await response.json();
-      geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
-      geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
-      //  'optional chaining ?' operator on 'results[0]?.geometry..' to avoid error
-      //  'nullish coalescing ??' operator to return '0' if lat/lng = null/undefined
+      if (
+        auth.email === process.env.REACT_APP_ADMIN ||
+        process.env.REACT_APP_USER
+      ) {
+        const response = await fetch(
+          `${geocodeURL}?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
+        );
+        const data = await response.json();
+        geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
+        geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
+        //  'optional chaining ?' operator on 'results[0]?.geometry..' to avoid error
+        //  'nullish coalescing ??' operator to return '0' if lat/lng = null/undefined
 
-      location =
-        data.status === 'ZERO_RESULTS'
-          ? undefined
-          : data.results[0]?.formatted_address;
+        location =
+          data.status === 'ZERO_RESULTS'
+            ? undefined
+            : data.results[0]?.formatted_address;
 
-      if (location === undefined || location.includes('undefined')) {
-        setLoading(false);
-        toast.error('Please enter correct address format.');
-        return;
+        if (location === undefined || location.includes('undefined')) {
+          setLoading(false);
+          toast.error('Please enter correct address format.');
+          return;
+        }
+
+      } else {
+        setGeolocationEnabled(false);
+        geolocation.lat = latitude;
+        geolocation.lng = longitude;
       }
-    } else {
-      geolocation.lat = latitude;
-      geolocation.lng = longitude;
     }
 
     // Store image in Firebase & return URL
@@ -230,9 +233,9 @@ function CreateListing() {
   }
 
   return (
-    <div className='profile'>
+    <div className='profile-pg'>
       <header>
-        <p className='pg-header'>Create a Listing</p>
+        <p className='pg-heading-1'>Create a Listing</p>
       </header>
       <main>
         <form onSubmit={onSubmit}>
