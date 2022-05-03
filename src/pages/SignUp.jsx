@@ -15,7 +15,6 @@ import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRig
 // Components
 import OAuth from '../components/OAuth';
 
-
 /**
  * @desc Create new user in Firebase w/credentials or Google OAuth
  * @public /sign-up
@@ -30,7 +29,7 @@ function SignUp() {
     pwd: '',
   });
   const { name, email, pwd } = formData;
-  // 
+  //
   const navigate = useNavigate();
 
   // Input typing real-time display
@@ -61,7 +60,7 @@ function SignUp() {
       delete formDataCopy.pwd;
       formDataCopy.timestamp = serverTimestamp();
       await setDoc(doc(db, 'users', user.uid), formDataCopy);
-      
+
       // redirect home
       navigate('/');
     } catch (error) {
@@ -124,13 +123,17 @@ function SignUp() {
         {/* Google OAuth btn */}
         <OAuth />
 
-        <Link to='/sign-in' className='sign-instead-link'>
-          Sign In Instead
-        </Link>
+        <p className='sign-instead-txt'>
+          I already have an account
+          <button className='sign-instead-btn'>
+            <Link to='/sign-in' className='sign-instead-link'>
+              Sign In
+            </Link>{' '}
+          </button>
+        </p>
       </div>
     </>
   );
 }
 
 export default SignUp;
-

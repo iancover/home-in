@@ -9,7 +9,6 @@ import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRig
 // Components
 import OAuth from '../components/OAuth';
 
-
 /**
  * @desc Auth existing user & redirect home
  * @public /sign-in
@@ -40,11 +39,7 @@ function SignIn() {
     e.preventDefault();
     try {
       const auth = getAuth();
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        pwd
-      );
+      const userCredential = await signInWithEmailAndPassword(auth, email, pwd);
       if (userCredential.user) {
         navigate('/');
       }
@@ -103,13 +98,17 @@ function SignIn() {
         {/* Google OAuth */}
         <OAuth />
 
-        <Link to='/sign-up' className='sign-instead-link'>
-          Sign Up Instead
-        </Link>
+        <p className='sign-instead-txt'>
+          I don't have an account
+          <button className='sign-instead-btn'>
+            <Link to='/sign-up' className='sign-instead-link'>
+              Sign Up
+            </Link>{' '}
+          </button>
+        </p>
       </div>
     </>
   );
 }
 
 export default SignIn;
-
