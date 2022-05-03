@@ -233,7 +233,7 @@ function CreateListing() {
   }
 
   return (
-    <div className='profile-pg'>
+    <div className='create-listing-pg'>
       <header>
         <p className='pg-heading-1'>Create a Listing</p>
       </header>
@@ -359,7 +359,7 @@ function CreateListing() {
             placeholder='street , city , st zip'
             required
           />
-          <small className='images-info lighter'>
+          <small className='sub-input-info'>
             &emsp; Street, City, State comma separated.
           </small>
 
@@ -454,11 +454,11 @@ function CreateListing() {
             multiple
             required
           />
-          <small className='images-info lighter'>
+          <small className='sub-input-info'>
             &emsp;Max 6 images, listing cover will be first image.
           </small>
 
-          <button type='submit' className='btn-primary create-listing-btn'>
+          <button type='submit' className='btn-primary create-edit-listing-btn'>
             Create Listing
           </button>
         </form>

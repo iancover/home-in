@@ -45,10 +45,10 @@ function OAuth() {
   };
 
   return (
-    <div className='social-login'>
+    <div className='oauth-login-div'>
       <p>Sign {location.pathname === '/sign-up' ? 'Up' : 'In'} with </p>
-      <button className='social-icon-div' onClick={onGoogleClick}>
-        <img src={googleIcon} alt='google' className='social-icon-img' />
+      <button className='oauth-login-btn' onClick={onGoogleClick}>
+        <img src={googleIcon} alt='google' className='oauth-login-img-icon' />
       </button>
     </div>
   );

@@ -16,7 +16,6 @@ import { v4 as uuidv4 } from 'uuid';
 // Components
 import Spinner from '../components/Spinner';
 
-
 /**
  * @desc Form data to update listing or redirect home unauth users
  * @public /edit-listing/:listingId
@@ -238,6 +237,7 @@ function EditListing() {
 
     // img files
     if (e.target.files) {
+      console.log(e.target.files);
       setFormData((prevState) => ({
         ...prevState,
         images: e.target.files,
@@ -258,7 +258,7 @@ function EditListing() {
   }
 
   return (
-    <div className='profile'>
+    <div className='edit-listing-pg'>
       <header>
         <p className='pg-heading-1'>Edit Listing</p>
       </header>
@@ -384,7 +384,7 @@ function EditListing() {
             placeholder='street , city , st zip'
             required
           />
-          <small className='images-info lighter'>
+          <small className='sub-input-info'>
             &emsp; Street, City, State comma separated.
           </small>
 
@@ -479,21 +479,18 @@ function EditListing() {
             multiple
             required
           />
-          <small className='images-info lighter'>
+          <small className='sub-input-info'>
             &emsp;Max 6 images, listing cover will be first image.
           </small>
 
-          <button
-            type='button'
-            className='btn-secondary create-listing-btn'
-            onClick={() => navigate('/profile')}>
-            Cancel
+          <button type='submit' className='btn-primary create-edit-listing-btn'>
+            Edit Listing
           </button>
           <button
-            type='submit'
-            className='btn-primary create-listing-btn'
-            style={{ marginTop: '20px' }}>
-            Edit Listing
+            type='button'
+            className='btn-secondary create-edit-cancel-btn'
+            onClick={() => navigate('/profile')}>
+            Cancel
           </button>
         </form>
       </main>

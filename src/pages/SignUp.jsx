@@ -71,7 +71,7 @@ function SignUp() {
 
   return (
     <>
-      <div className='pg-container'>
+      <div className='sign-up-pg'>
         <header>
           <p className='pg-heading-1'>Welcome</p>
         </header>
@@ -124,7 +124,7 @@ function SignUp() {
         {/* Google OAuth btn */}
         <OAuth />
 
-        <Link to='/sign-in' className='register-link'>
+        <Link to='/sign-in' className='sign-instead-link'>
           Sign In Instead
         </Link>
       </div>

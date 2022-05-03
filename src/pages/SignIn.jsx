@@ -55,7 +55,7 @@ function SignIn() {
 
   return (
     <>
-      <div className='pg-container'>
+      <div className='sign-in-pg'>
         <header>
           <p className='pg-heading-1'>Welcome Back!</p>
         </header>
@@ -103,7 +103,7 @@ function SignIn() {
         {/* Google OAuth */}
         <OAuth />
 
-        <Link to='/sign-up' className='register-link'>
+        <Link to='/sign-up' className='sign-instead-link'>
           Sign Up Instead
         </Link>
       </div>

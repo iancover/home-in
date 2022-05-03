@@ -175,7 +175,7 @@ function Profile() {
           </form>
         </div>
 
-        <Link to='/create-listing' className='create-listing'>
+        <Link to='/create-listing' className='create-listing-link'>
           <img src={homeIcon} alt='home' />
           <p>Sell or Rent your home</p>
           <img src={arrowRight} alt='arrow right' />

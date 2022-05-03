@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+:root {
+  --black: #000;
+  --grey: #333;
+  --white: #fff;
+  --blue: #a3cef1;
+  --orange: #f97b62;
+  --green: #00cc66;
+}
+
 html::-webkit-scrollbar {
   display: none;
   scroll-behavior: smooth;
@@ -12,8 +21,7 @@ html::-webkit-scrollbar {
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  /* background-color: #93dda8; */
-  background-color: #7fbde3;
+  background-color: var(--blue);
 }
 
 li {
@@ -24,14 +32,6 @@ li {
   display: flex;
 }
 
-.imgs-info {
-  font-size: 0.9rem;
-  opacity: 0.75;
-}
-
-.lighter {
-  color: rgba(0, 0, 0, 0.4);
-}
 
 /*  HEADINGS  */
 
@@ -70,8 +70,8 @@ button {
   padding: 0.85rem 2rem;
   font-weight: 600;
   font-size: 1.25rem;
-  color: #ffffff;
-  background: #00cc66;
+  color: var(--white);
+  background-color: var(--orange);
   border-radius: 1rem;
   cursor: pointer;
 }
@@ -82,11 +82,12 @@ button {
   align-items: center;
   width: 80%;
   margin: 0 auto;
-  padding: 0.85rem 2rem;
+  padding: 0.8rem 2rem;
   font-weight: 600;
   font-size: 1.25rem;
-  color: #ffffff;
-  background: rgb(194, 110, 101);
+  color: var(--orange);
+  background-color: transparent;
+  border: 2px var(--orange) solid;
   border-radius: 1rem;
   cursor: pointer;
 }
@@ -94,25 +95,18 @@ button {
 a {
   text-decoration: none;
   display: block;
-  color: #000000;
+  color: var(--black);
 }
 
-.register-link {
-  margin-top: 4rem;
-  margin-bottom: 3rem;
-  text-align: center;
-  font-weight: 600;
-  color: #00cc66;
-}
-
-.link-copied {
+/* Listing.jsx */
+p.link-copied {
   position: fixed;
   top: 9%;
   right: 5%;
   z-index: 2;
   padding: 0.5rem 1rem;
   font-weight: 600;
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 1rem;
 }
 
@@ -130,7 +124,7 @@ a {
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--grey);
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 1rem;
   cursor: pointer;
@@ -138,7 +132,7 @@ a {
 
 .delete-icon {
   position: absolute;
-  top: 5%;
+  top: 70%;
   right: -5%;
   height: 25%;
   width: 25%;
@@ -147,7 +141,7 @@ a {
 
 .edit-icon {
   position: absolute;
-  top: 40%;
+  top: 10%;
   right: -3%;
   height: 20%;
   width: 20%;
@@ -166,7 +160,7 @@ a {
   padding: 0 3rem;
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
-  background: #ffffff;
+  background: var(--white);
   border: none;
   border-radius: 3rem;
   box-shadow: rgba(0, 0, 0, 0.11);
@@ -181,19 +175,19 @@ textarea::placeholder {
 }
 
 .textarea {
-  height: 300px;
+  height: 200px;
   padding: 1rem 1.5rem;
   border-radius: 1rem;
 }
 
 .name-input {
   margin-bottom: 2rem;
-  background: url('./assets/svg/badgeIcon.svg') #ffffff 2.5% center no-repeat;
+  background: url('./assets/svg/badgeIcon.svg') var(--white) 2.5% center no-repeat;
 }
 
 .email-input {
   margin-bottom: 2rem;
-  background: url('./assets/svg/personIcon.svg') #ffffff 2.5% center no-repeat;
+  background: url('./assets/svg/personIcon.svg') var(--white) 2.5% center no-repeat;
 }
 
 .pwd-input-div {
@@ -201,8 +195,8 @@ textarea::placeholder {
 }
 
 .pwd-input {
-  margin-bottom: 2rem;
-  background: url('./assets/svg/lockIcon.svg') #ffffff 2.5% center no-repeat;
+  margin-bottom: 1rem;
+  background: url('./assets/svg/lockIcon.svg') var(--white) 2.5% center no-repeat;
 }
 
 .show-pwd {
@@ -223,9 +217,9 @@ textarea::placeholder {
 }
 
 .forgot-pwd-link {
-  text-align: right;
+  text-align: center;
   font-weight: 600;
-  color: #00cc66;
+  color: var(--orange);
   cursor: pointer;
 }
 
@@ -262,7 +256,7 @@ textarea::placeholder {
 .form-input-file,
 .form-btn-active {
   padding: 0.9rem 3rem;
-  background-color: #ffffff;
+  background-color: var(--white);
   font-weight: 600;
   border-radius: 1rem;
   font-size: 1rem;
@@ -273,8 +267,8 @@ textarea::placeholder {
 }
 
 .form-btn-active {
-  background-color: #00cc66;
-  color: #ffffff;
+  background-color: var(--orange);
+  color: var(--white);
 }
 
 .form-input,
@@ -321,9 +315,9 @@ textarea::placeholder {
 }
 
 .form-input-file::-webkit-file-upload-button {
-  background-color: #00cc66;
+  background-color: var(--orange);
   border: none;
-  color: #ffffff;
+  color: var(--white);
   font-weight: 600;
   padding: 0.5rem 0.75rem;
   border-radius: 1rem;
@@ -337,12 +331,12 @@ textarea::placeholder {
 .offers-pg,
 .profile-pg,
 .listing-pg,
-.contact-pg {
+.contact-pg,
+.sign-in-pg,
+.sign-up-pg,
+.create-listing-pg,
+.edit-listing-pg {
   margin: 1rem;
-}
-
-.offers-pg,
-.category-pg {
   margin-bottom: 10rem;
 }
 
@@ -393,8 +387,8 @@ textarea::placeholder {
   padding: 0.5rem;
   text-align: center;
   font-weight: 600;
-  color: #ffffff;
-  background-color: #000000;
+  color: var(--white);
+  background-color: var(--black);
   border-radius: 1rem;
   opacity: 0.7;
   cursor: pointer;
@@ -404,8 +398,8 @@ textarea::placeholder {
 
 .offer-badge {
   padding: 0.25rem 0.5rem;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--black);
+  color: var(--white);
   border-radius: 1rem;
   margin-left: 1rem;
   font-size: 0.8rem;
@@ -429,8 +423,8 @@ button.log-out {
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: #ffffff;
-  background-color: #00cc66;
+  color: var(--white);
+  background-color: var(--orange);
   border-radius: 1rem;
   cursor: pointer;
 }
@@ -444,14 +438,14 @@ button.log-out {
 .profile-card {
   /* max-width: 500px; */
   padding: 1rem;
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.2);
 }
 
 .profile-change-details {
   font-weight: 600;
-  color: #00cc66;
+  color: var(--orange);
   cursor: pointer;
 }
 
@@ -489,7 +483,7 @@ button.log-out {
   align-items: center;
   width: 3rem;
   height: 3rem;
-  color: #333;
+  color: var(--grey);
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 50%;
   cursor: pointer;
@@ -523,7 +517,7 @@ button.log-out {
   display: inline;
   margin-right: 1rem;
   padding: 0.25rem 0.5rem;
-  color: #ffffff;
+  color: var(--white);
   background-color: rgba(70, 73, 76, 0.8);
   border-radius: 2rem;
   font-weight: 600;
@@ -535,7 +529,7 @@ button.log-out {
   padding: 0.25rem 0.5rem;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--white);
   background-color: rgba(70, 73, 76, 0.8);
   border-radius: 1rem;
 }
@@ -576,7 +570,7 @@ button.log-out {
 }
 
 .swiper-pgn-bullet-active {
-  background-color: #ffffff !important;
+  background-color: var(--white) !important;
 }
 
 .swiper-slide-div {
@@ -599,7 +593,7 @@ button.log-out {
   max-width: 60%;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--white);
   background-color: rgba(0, 0, 0, 0.5);
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
@@ -612,8 +606,8 @@ button.log-out {
   max-width: 90%;
   padding: 0.25rem 0.5rem;
   font-weight: 600;
-  color: #000000;
-  background-color: #ffffff;
+  color: var(--black);
+  background-color: var(--white);
   border-radius: 1rem;
   opacity: 0.85;
 }
@@ -702,7 +696,7 @@ button.log-out {
 
 /*  CREATE & EDIT LISTING */
 
-.create-listing {
+.create-listing-link {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -710,24 +704,33 @@ button.log-out {
   margin-top: 2rem;
   padding: 0.25rem 1rem;
   font-weight: 600;
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.2);
 }
 
-.create-listing-btn {
-  margin-top: 3rem;
+.create-edit-listing-btn {
+  margin-top: 2rem;
+}
+
+.create-edit-cancel-btn {
+  margin-top: 2rem;
+}
+
+.sub-input-info {
+  font-size: 0.9rem;
+  opacity: 0.4;
 }
 
 /*  SIGN IN & SIGN OUT  */
 
 .sign-in-bar,
 .sign-up-bar {
-  margin-top: 3rem;
+  /* position: inherit; */
   display: flex;
-  justify-content: space-between;
+  margin-top: 1rem;
+  justify-content: space-around;
   align-items: center;
-  position: inherit;
 }
 
 .sign-in-btn,
@@ -737,12 +740,6 @@ button.log-out {
   cursor: pointer;
 }
 
-.sign-in-txt,
-.sign-up-txt {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
 .sign-in-btn,
 .sign-up-btn {
   display: flex;
@@ -750,32 +747,51 @@ button.log-out {
   align-items: center;
   width: 3rem;
   height: 3rem;
-  background-color: #00cc66;
+  background-color: var(--orange);
   border-radius: 50%;
 }
 
-.social-login {
+.sign-in-txt,
+.sign-up-txt {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.sign-instead-link {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  /* color: #00CC66; */
+  color: var(--orange);
+}
+
+
+/*  OAUTH  */
+
+.oauth-login-div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 4rem;
+  margin-top: 1rem;
 }
 
-.social-icon-div {
+.oauth-login-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0.75rem;
-  margin: 1.5rem;
+  margin: 1rem;
   width: 3rem;
   height: 3rem;
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 50%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
-.social-icon-img {
+.oauth-login-img-icon {
   width: 100%;
 }
 
@@ -793,7 +809,7 @@ button.log-out {
   right: 0;
   z-index: 1000;
   height: 85px;
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 
 .navbar-nav {
@@ -826,7 +842,7 @@ button.log-out {
 }
 
 .nav-list-item-name-active {
-  color: #2c2c2c;
+  color: var(--grey);
 }
 
 /*  LISTING ITEM  */
@@ -885,12 +901,12 @@ button.log-out {
 
 .list-item-price {
   display: flex;
+  align-items: center;
   margin-top: 0.5rem;
+  margin-bottom: 0;
   font-weight: 600;
   font-size: 1.1rem;
-  color: #00cc66;
-  margin-bottom: 0;
-  align-items: center;
+  color: var(--orange);
 }
 
 .list-item-info-div {
@@ -924,7 +940,7 @@ button.log-out {
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: #00cc66 transparent #00cc66 transparent;
+  border-color: var(--orange) transparent var(--orange) transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
@@ -941,7 +957,6 @@ button.log-out {
 
 /*  Inputs  */
 @media (min-width: 1100px) {
-  /* inputs */
   .input,
   .pwd-input,
   .email-input,
