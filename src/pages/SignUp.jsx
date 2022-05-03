@@ -23,13 +23,14 @@ import OAuth from '../components/OAuth';
 function SignUp() {
   // states: view pwd & input values
   const [showPwd, setShowPwd] = useState(false);
-  const [formData, setFormData] = useState({
+  const clearForm = {
     name: '',
     email: '',
     pwd: '',
-  });
+  }
+  const [formData, setFormData] = useState(clearForm);
   const { name, email, pwd } = formData;
-  //
+  // to go home
   const navigate = useNavigate();
 
   // Input typing real-time display
@@ -43,28 +44,33 @@ function SignUp() {
   // Create user w/Firebase auth & redirect home
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
-      // auth user w/email & pwd encryption
-      const auth = getAuth();
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        pwd
-      );
-      const user = userCredential.user;
-      updateProfile(auth.currentUser, {
-        displayName: name,
-      });
-      // store user details without pwd
-      const formDataCopy = { ...formData };
-      delete formDataCopy.pwd;
-      formDataCopy.timestamp = serverTimestamp();
-      await setDoc(doc(db, 'users', user.uid), formDataCopy);
+    if (email === process.env.REACT_APP_ADMIN) { // <- *** REMOVE ***
+      try {
+        // auth user w/email & pwd, store details without pwd
+        const auth = getAuth();
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          pwd
+        );
+        const user = userCredential.user;
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        });
+        const formDataCopy = { ...formData };
+        delete formDataCopy.pwd;
+        formDataCopy.timestamp = serverTimestamp();
+        await setDoc(doc(db, 'users', user.uid), formDataCopy);
 
-      // redirect home
-      navigate('/');
-    } catch (error) {
-      toast.error('Registration Error! Please Try Again');
+        // redirect home
+        navigate('/');
+      } catch (error) {
+        setFormData(clearForm);
+        toast.error('Registration Error! Please Try Again');
+      }
+    } else {  // <- *** REMOVE ***
+      setFormData(clearForm);
+      toast.error('Sign Up is currently disabled.');
     }
   };
 

@@ -17,10 +17,11 @@ import OAuth from '../components/OAuth';
 function SignIn() {
   // states: view pwd, input values
   const [showPwd, setShowPwd] = useState(false);
-  const [formData, setFormData] = useState({
+  const clearForm = {
     email: '',
     pwd: '',
-  });
+  };
+  const [formData, setFormData] = useState(clearForm);
   const { email, pwd } = formData;
 
   // to redirect home
@@ -41,9 +42,10 @@ function SignIn() {
       const auth = getAuth();
       const userCredential = await signInWithEmailAndPassword(auth, email, pwd);
       if (userCredential.user) {
-        navigate('/');
+        navigate('/profile');
       }
     } catch (error) {
+      setFormData(clearForm);
       toast.error('Enter valid email & password, or Sign Up.');
     }
   };

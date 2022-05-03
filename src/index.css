@@ -32,7 +32,6 @@ li {
   display: flex;
 }
 
-
 /*  HEADINGS  */
 
 .pg-heading-1 {
@@ -150,10 +149,9 @@ p.link-copied {
 
 /*   I N P U T S   */
 
-.input,
-.pwd-input,
-.email-input,
 .name-input,
+.email-input,
+.pwd-input,
 .textarea {
   width: 100%;
   height: 3rem;
@@ -182,12 +180,14 @@ textarea::placeholder {
 
 .name-input {
   margin-bottom: 2rem;
-  background: url('./assets/svg/badgeIcon.svg') var(--white) 2.5% center no-repeat;
+  background: url('./assets/svg/badgeIcon.svg') var(--white) 2.5% center
+    no-repeat;
 }
 
 .email-input {
   margin-bottom: 2rem;
-  background: url('./assets/svg/personIcon.svg') var(--white) 2.5% center no-repeat;
+  background: url('./assets/svg/personIcon.svg') var(--white) 2.5% center
+    no-repeat;
 }
 
 .pwd-input-div {
@@ -195,8 +195,9 @@ textarea::placeholder {
 }
 
 .pwd-input {
-  margin-bottom: 1rem;
-  background: url('./assets/svg/lockIcon.svg') var(--white) 2.5% center no-repeat;
+  margin-bottom: 0.5rem;
+  background: url('./assets/svg/lockIcon.svg') var(--white) 2.5% center
+    no-repeat;
 }
 
 .show-pwd {
@@ -219,7 +220,8 @@ textarea::placeholder {
 .forgot-pwd-link {
   text-align: center;
   font-weight: 600;
-  color: var(--orange);
+  color: var(--grey);
+  opacity: 0.7;
   cursor: pointer;
 }
 
@@ -339,7 +341,6 @@ textarea::placeholder {
   margin: 1rem;
   margin-bottom: 10rem;
 }
-
 
 /*  EXPLORE */
 
@@ -728,9 +729,16 @@ button.log-out {
 .sign-up-bar {
   /* position: inherit; */
   display: flex;
-  margin-top: 1rem;
-  justify-content: space-around;
+  margin-top: 0.5rem;
+  justify-content: center;
   align-items: center;
+}
+
+.sign-in-txt,
+.sign-up-txt {
+  padding-right: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .sign-in-btn,
@@ -751,10 +759,14 @@ button.log-out {
   border-radius: 50%;
 }
 
-.sign-in-txt,
-.sign-up-txt {
-  font-size: 1.5rem;
-  font-weight: 700;
+.sign-instead-txt {
+  text-align: center;
+  font-weight: 400;
+  color: #777;
+}
+
+.sign-instead-btn {
+  background-color: transparent;
 }
 
 .sign-instead-link {
@@ -767,28 +779,31 @@ button.log-out {
   color: var(--orange);
 }
 
-
 /*  OAUTH  */
 
 .oauth-login-div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0.3rem;
 }
 
 .oauth-login-btn {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   padding: 0.75rem;
-  margin: 1rem;
+  margin-bottom: 0.5rem;
   width: 3rem;
   height: 3rem;
   background-color: var(--white);
   border-radius: 50%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   cursor: pointer;
+}
+
+.oauth-login-txt {
+  color: #555;
 }
 
 .oauth-login-img-icon {

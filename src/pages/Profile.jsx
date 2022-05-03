@@ -78,7 +78,7 @@ function Profile() {
   // Logout & redirect home
   const onLogout = () => {
     auth.signOut();
-    navigate('/');
+    navigate('/sign-in');
   };
 
   // Update user in Firebase
