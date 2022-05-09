@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 // Icons
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
 
-
 /**
  * @desc Enter email to send Firebase pwd reset form
  * @public /forgot-pwd
@@ -25,10 +24,14 @@ function ForgotPwd() {
     try {
       const auth = getAuth();
       await sendPasswordResetEmail(auth, email);
-      toast.success('Email was sent');
+      toast.success('Email was sent', {
+        theme: 'colored',
+      });
       navigate('/sign-in');
     } catch (error) {
-      toast.error('Could not send reset email');
+      toast.error('Could not send reset email', {
+        theme: 'colored',
+      });
     }
   };
 

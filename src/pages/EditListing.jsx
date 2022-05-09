@@ -66,7 +66,9 @@ function EditListing() {
   // redirect if user is not listing owner
   useEffect(() => {
     if (listing && listing.userRef !== auth.currentUser.uid) {
-      toast.error('You can not update that listing.');
+      toast.error('You can not update that listing.', {
+        theme: 'colored',
+      });
       navigate('/');
     }
   });
@@ -84,7 +86,9 @@ function EditListing() {
         setLoading(false);
       } else {
         navigate('/');
-        toast.error('Listing does not exist');
+        toast.error('Listing does not exist', {
+          theme: 'colored',
+        });
       }
     };
     fetchListing();
@@ -114,13 +118,17 @@ function EditListing() {
     // price check
     if (discountedPrice >= regularPrice) {
       setLoading(false);
-      toast.error('Discounted price needs to be less than regular price');
+      toast.error('Discounted price needs to be less than regular price', {
+        theme: 'colored',
+      });
       return;
     }
     // max upload
     if (images.length > 6) {
       setLoading(false);
-      toast.error('Max 6 images');
+      toast.error('Max 6 images', {
+        theme: 'colored',
+      });
       return;
     }
     // Geocoding API: if enabled pass address to geocode, else null.
@@ -146,7 +154,9 @@ function EditListing() {
       console.log(data);
       if (location === undefined || location.includes('undefined')) {
         setLoading(false);
-        toast.error('Please enter correct formatted address.');
+        toast.error('Please enter correct formatted address.', {
+          theme: 'colored',
+        });
         return;
       }
     } else {
@@ -202,7 +212,9 @@ function EditListing() {
       })
     ).catch(() => {
       setLoading(false);
-      toast.error('Images not uploaded');
+      toast.error('Images not uploaded', {
+        theme: 'colored',
+      });
       return;
     });
 
@@ -223,7 +235,9 @@ function EditListing() {
     const docRef = doc(db, 'listings', params.listingId);
     await updateDoc(docRef, formDataCopy);
     setLoading(false);
-    toast.success('Listing saved');
+    toast.success('Listing saved', {
+      theme: 'colored',
+    });
     navigate(`/category/${formDataCopy.type}/${docRef.id}`);
   };
 

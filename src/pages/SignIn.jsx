@@ -46,7 +46,9 @@ function SignIn() {
       }
     } catch (error) {
       setFormData(clearForm);
-      toast.error('Enter valid email & password, or Sign Up.');
+      toast.error('Enter valid email & password, or Sign Up.', {
+        theme: 'colored',
+      });
     }
   };
 

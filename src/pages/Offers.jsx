@@ -16,7 +16,6 @@ import { toast } from 'react-toastify';
 import ListingItem from '../components/ListingItem';
 import Spinner from '../components/Spinner';
 
-
 /**
  * @desc Display all listings with discounted price 'listing.offer == true'
  * @public /offers
@@ -68,7 +67,9 @@ function Offers() {
         setListingsCountDisplay(listings.length);
         setLoading(false);
       } catch (error) {
-        toast.error('Could not fetch listings');
+        toast.error('Could not fetch listings', {
+          theme: 'colored',
+        });
       }
     };
 
@@ -116,7 +117,9 @@ function Offers() {
       setLoading(false);
       e.target.scrollIntoView({ behavior: 'smooth' });
     } catch (error) {
-      toast.error('Could not fetch more listings.');
+      toast.error('Could not fetch more listings.', {
+        theme: 'colored',
+      });
     }
   };
 
@@ -147,7 +150,9 @@ function Offers() {
             </ul>
             <br />
             {lastFetchedListing && (
-              <p className='listings-load-more' onClick={(e) => onFetchMoreListings(e)}>
+              <p
+                className='listings-load-more'
+                onClick={(e) => onFetchMoreListings(e)}>
                 Load More
               </p>
             )}

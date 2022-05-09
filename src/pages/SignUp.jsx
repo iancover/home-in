@@ -67,12 +67,16 @@ function SignUp() {
         navigate('/');
       } catch (error) {
         setFormData(clearForm);
-        toast.error('Registration Error! Please Try Again');
+        toast.error('Registration Error! Please Try Again', {
+          theme: 'colored',
+        });
       }
     } else {
       // <- *** REMOVE ***
       setFormData(clearForm);
-      toast.error('Sign Up is currently disabled.');
+      toast.error('Sign Up is currently disabled.', {
+        theme: 'colored',
+      });
     }
   };
 

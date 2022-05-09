@@ -90,13 +90,17 @@ function CreateListing() {
     // price check
     if (discountedPrice >= regularPrice) {
       setLoading(false);
-      toast.error('Discounted price needs to be less than regular price');
+      toast.error('Discounted price needs to be less than regular price', {
+        theme: 'colored',
+      });
       return;
     }
     // max upload
     if (images.length > 6) {
       setLoading(false);
-      toast.error('Max 6 images');
+      toast.error('Max 6 images', {
+        theme: 'colored',
+      });
       return;
     }
     // Geocoding API request
@@ -126,10 +130,11 @@ function CreateListing() {
 
         if (location === undefined || location.includes('undefined')) {
           setLoading(false);
-          toast.error('Please enter correct address format.');
+          toast.error('Please enter correct address format.', {
+            theme: 'colored',
+          });
           return;
         }
-
       } else {
         setGeolocationEnabled(false);
         geolocation.lat = latitude;
@@ -184,7 +189,9 @@ function CreateListing() {
       })
     ).catch(() => {
       setLoading(false);
-      toast.error('Images not uploaded');
+      toast.error('Images not uploaded', {
+        theme: 'colored',
+      });
       return;
     });
 
@@ -204,7 +211,9 @@ function CreateListing() {
     // save to db collection and go to listing
     const docRef = await addDoc(collection(db, 'listings'), formDataCopy);
     setLoading(false);
-    toast.success('Listing saved');
+    toast.success('Listing saved', {
+      theme: 'colored',
+    });
     navigate(`/category/${formDataCopy.type}/${docRef.id}`);
   };
 

@@ -26,7 +26,9 @@ function Contact() {
       if (docSnap.exists()) {
         setLandlord(docSnap.data());
       } else {
-        toast.error('Could not get landlord data');
+        toast.error('Could not get landlord data', {
+          theme: 'colored',
+        });
       }
     };
 

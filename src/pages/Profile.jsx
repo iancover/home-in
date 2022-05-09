@@ -67,7 +67,9 @@ function Profile() {
         setListings(listings);
         setLoading(false);
       } catch (error) {
-        toast.error('Could not fetch listings.');
+        toast.error('Could not fetch listings.', {
+          theme: 'colored',
+        });
       }
     };
 
@@ -94,7 +96,9 @@ function Profile() {
       }
     } catch (error) {
       console.log(error);
-      toast.error('Could not update profile details!');
+      toast.error('Could not update profile details!', {
+        theme: 'colored',
+      });
     }
   };
 
@@ -114,7 +118,9 @@ function Profile() {
         (listing) => listing.id !== listingId
       );
       setListings(updatedListings);
-      toast.success('Deleted listing.');
+      toast.success('Deleted listing.', {
+        theme: 'colored',
+      });
     }
   };
 

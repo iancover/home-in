@@ -17,8 +17,6 @@ import { toast } from 'react-toastify';
 import ListingItem from '../components/ListingItem';
 import Spinner from '../components/Spinner';
 
-
-
 /**
  * @desc Fetch & display listings from Firebase by type: rent/sale
  * @public /category/:categoryName
@@ -34,7 +32,7 @@ function Category() {
   // to get listing type from URL
   const params = useParams();
 
-  // Fetch initial listings 
+  // Fetch initial listings
   useEffect(() => {
     const fetchListings = async () => {
       try {
@@ -71,7 +69,9 @@ function Category() {
         setListingsCountDisplay(listings.length);
         setLoading(false);
       } catch (error) {
-        toast.error('Could not fetch listings');
+        toast.error('Could not fetch listings', {
+          theme: 'colored',
+        });
       }
     };
     fetchListings();
@@ -118,7 +118,9 @@ function Category() {
       // scroll to Load More
       e.target.scrollIntoView({ behavior: 'smooth' });
     } catch (error) {
-      toast.error('Could not fetch more listings.');
+      toast.error('Could not fetch more listings.', {
+        theme: 'colored',
+      });
     }
   };
 
@@ -150,7 +152,9 @@ function Category() {
           <br />
           <br />
           {lastFetchedListing && (
-            <p className='listings-load-more' onClick={(e) => onFetchMoreListings(e)}>
+            <p
+              className='listings-load-more'
+              onClick={(e) => onFetchMoreListings(e)}>
               Load More
             </p>
           )}
