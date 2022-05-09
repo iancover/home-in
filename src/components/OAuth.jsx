@@ -18,7 +18,8 @@ function OAuth() {
 
   // Google OAuth popup verify or create new user
   const onGoogleClick = async () => {
-    if (location.pathname === '/sign-in') { // <- *** REMOVE TO ENABLE ***
+    // *** REMOVE IF/ELSE TO ENABLE SIGN-UP ***
+    if (location.pathname === '/sign-in') {
       try {
         // verify Google OAuth user
         const auth = getAuth();
@@ -26,27 +27,34 @@ function OAuth() {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
 
-        // TO DISABLE NEW USERS
-        if (user.email !== process.env.REACT_APP_USER_GMAIL) { // <- *** REMOVE ***
-          auth.logout();
-        } else {
-          // check if user doesnt exist, create in db in 'users' collection
-          const docRef = doc(db, 'users', user.uid);
-          const docSnap = await getDoc(docRef);
-          if (!docSnap.exists()) {
-            await setDoc(doc(db, 'users', user.uid), {
-              name: user.displayName,
-              email: user.email,
-              timestamp: serverTimestamp(),
-            });
-          }
+        // check if user doesnt exist, create in db in 'users' collection
+        const docRef = doc(db, 'users', user.uid);
+        const docSnap = await getDoc(docRef);
+        if (!docSnap.exists()) {
+          // *** REMOVE CODE TO ENABLE CODE BELOW ***
+          toast.error('New user sign-up temporarily disabled.', {
+            theme: 'colored',
+          });
+          navigate('/sign-in');
+
+          // *** UNCOMMENT TO ENABLE NEW GMAIL USER ***
+          // await setDoc(doc(db, 'users', user.uid), {
+          //   name: user.displayName,
+          //   email: user.email,
+          //   timestamp: serverTimestamp(),
+          // });
         }
         navigate('/profile');
       } catch (error) {
-        toast.error('Could not authorize with Google');
+        toast.error('Could not authorize with Google', {
+          theme: 'colored',
+        });
       }
-    } else {   // <- *** REMOVE TO ENABLE ***
-      toast.error('Feature disabled');
+    } else {
+      toast.error('New user sign-up temporarily disabled.', {
+        theme: 'colored',
+      });
+      navigate('/sign-in');
     }
   };
 
