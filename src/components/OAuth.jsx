@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useLocation, useNavigate } from 'react-router-dom';
 // Firebase & Toastify
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
