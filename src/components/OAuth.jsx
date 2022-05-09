@@ -18,40 +18,31 @@ function OAuth() {
 
   // Google OAuth popup verify or create new user
   const onGoogleClick = async () => {
-    // *** REMOVE IF/ELSE TO ENABLE SIGN-UP ***
-    if (location.pathname === '/sign-in') {
-      try {
-        // verify Google OAuth user
-        const auth = getAuth();
-        const provider = new GoogleAuthProvider();
+    try {
+      // verify Google OAuth user
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
 
-        // *** REMOVE & UNCOMMENT TO CHECK/CREATE NEW USER ***
-        signInWithPopup(auth, provider);
+      // *** REMOVE & UNCOMMENT TO CHECK/CREATE NEW USER ***
+      signInWithPopup(auth, provider);
+      // const result = await signInWithPopup(auth, provider);
+      // const user = result.user;
 
-        // const result = await signInWithPopup(auth, provider);
-        // const user = result.user;
-
-        // // check if user doesnt exist, create in db in 'users' collection
-        // const docRef = doc(db, 'users', user.uid);
-        // const docSnap = await getDoc(docRef);
-        // if (!docSnap.exists()) {
-        //   await setDoc(doc(db, 'users', user.uid), {
-        //     name: user.displayName,
-        //     email: user.email,
-        //     timestamp: serverTimestamp(),
-        //   });
-        // }
-        navigate('/profile');
-      } catch (error) {
-        toast.error('Could not authorize with Google', {
-          theme: 'colored',
-        });
-      }
-    } else {
-      toast.error('New user sign-up temporarily disabled.', {
+      // // check if user doesnt exist, create in db in 'users' collection
+      // const docRef = doc(db, 'users', user.uid);
+      // const docSnap = await getDoc(docRef);
+      // if (!docSnap.exists()) {
+      //   await setDoc(doc(db, 'users', user.uid), {
+      //     name: user.displayName,
+      //     email: user.email,
+      //     timestamp: serverTimestamp(),
+      //   });
+      // }
+      navigate('/profile');
+    } catch (error) {
+      toast.error('Could not authorize with Google', {
         theme: 'colored',
       });
-      navigate('/sign-in');
     }
   };
 
