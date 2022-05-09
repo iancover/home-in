@@ -22,7 +22,6 @@ import homeIcon from '../assets/svg/homeIcon.svg';
 import Spinner from '../components/Spinner';
 import ListingItem from '../components/ListingItem';
 
-
 /**
  * @desc User details, new listing & display created listings
  * @private /profile
@@ -175,11 +174,14 @@ function Profile() {
           </form>
         </div>
 
-        <Link to='/create-listing' className='create-listing-link'>
-          <img src={homeIcon} alt='home' />
-          <p>Sell or Rent your home</p>
-          <img src={arrowRight} alt='arrow right' />
-        </Link>
+        {(auth.currentUser.uid === process.env.REACT_APP_ADMIN_ID ||
+          process.env.REACT_APP_USER_ID) && (
+          <Link to='/create-listing' className='create-listing-link'>
+            <img src={homeIcon} alt='home' />
+            <p>Sell or Rent your home</p>
+            <img src={arrowRight} alt='arrow right' />
+          </Link>
+        )}
 
         {!loading && listings?.length > 0 && (
           <>
