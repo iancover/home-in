@@ -25,9 +25,11 @@ function OAuth() {
       const provider = new GoogleAuthProvider();
 
       // *** REMOVE & UNCOMMENT TO CHECK/CREATE NEW USER ***
-      signInWithPopup(auth, provider);
-      // const result = await signInWithPopup(auth, provider);
-      // const user = result.user;
+      // signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      console.log(user);
 
       // // check if user doesnt exist, create in db in 'users' collection
       // const docRef = doc(db, 'users', user.uid);
