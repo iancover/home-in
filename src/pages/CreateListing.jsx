@@ -59,6 +59,9 @@ function CreateListing() {
 
   // init Firebase auth
   const auth = getAuth();
+
+  console.log(auth);
+
   // to redirect to sign in
   const navigate = useNavigate();
 
@@ -101,10 +104,11 @@ function CreateListing() {
     let location;
     const geocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json';
 
+    // *** ONLY ADMIN & USER CAN USE GEOCODE API
     if (geolocationEnabled) {
       if (
-        auth.email === process.env.REACT_APP_ADMIN ||
-        process.env.REACT_APP_USER
+        auth.currentUser.uid === process.env.REACT_APP_ADMIN_ID ||
+        process.env.REACT_APP_USER_ID
       ) {
         const response = await fetch(
           `${geocodeURL}?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`

@@ -27,7 +27,7 @@ function SignUp() {
     name: '',
     email: '',
     pwd: '',
-  }
+  };
   const [formData, setFormData] = useState(clearForm);
   const { name, email, pwd } = formData;
   // to go home
@@ -44,7 +44,8 @@ function SignUp() {
   // Create user w/Firebase auth & redirect home
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (email === process.env.REACT_APP_ADMIN) { // <- *** REMOVE ***
+    //  *** ONLY NEW USER i@yahoo acct ***
+    if (email === process.env.REACT_APP_NEW_USER_EMAIL) {
       try {
         // auth user w/email & pwd, store details without pwd
         const auth = getAuth();
@@ -68,7 +69,8 @@ function SignUp() {
         setFormData(clearForm);
         toast.error('Registration Error! Please Try Again');
       }
-    } else {  // <- *** REMOVE ***
+    } else {
+      // <- *** REMOVE ***
       setFormData(clearForm);
       toast.error('Sign Up is currently disabled.');
     }
