@@ -1,7 +1,8 @@
 # Home In
 
-A mobile first [React](https://reactjs.org/docs/getting-started.html) application to create a real-estate marketplace where property owners, home buyers and renters can search or list properties for sale or lease.
+[![vercel logo](/assets/images/vercel-btn.png)](https://home-in.vercel.app)
 
+A mobile first [React](https://reactjs.org/docs/getting-started.html) application to create a real-estate marketplace where property owners, home buyers and renters can search or list properties for sale or lease.
 
 ## Dependencies
 
