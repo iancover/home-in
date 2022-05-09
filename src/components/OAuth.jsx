@@ -24,26 +24,23 @@ function OAuth() {
         // verify Google OAuth user
         const auth = getAuth();
         const provider = new GoogleAuthProvider();
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
 
-        // check if user doesnt exist, create in db in 'users' collection
-        const docRef = doc(db, 'users', user.uid);
-        const docSnap = await getDoc(docRef);
-        if (!docSnap.exists()) {
-          // *** REMOVE CODE TO ENABLE CODE BELOW ***
-          toast.error('New user sign-up temporarily disabled.', {
-            theme: 'colored',
-          });
-          navigate('/sign-in');
+        // *** REMOVE & UNCOMMENT TO CHECK/CREATE NEW USER ***
+        signInWithPopup(auth, provider);
 
-          // *** UNCOMMENT TO ENABLE NEW GMAIL USER ***
-          // await setDoc(doc(db, 'users', user.uid), {
-          //   name: user.displayName,
-          //   email: user.email,
-          //   timestamp: serverTimestamp(),
-          // });
-        }
+        // const result = await signInWithPopup(auth, provider);
+        // const user = result.user;
+
+        // // check if user doesnt exist, create in db in 'users' collection
+        // const docRef = doc(db, 'users', user.uid);
+        // const docSnap = await getDoc(docRef);
+        // if (!docSnap.exists()) {
+        //   await setDoc(doc(db, 'users', user.uid), {
+        //     name: user.displayName,
+        //     email: user.email,
+        //     timestamp: serverTimestamp(),
+        //   });
+        // }
         navigate('/profile');
       } catch (error) {
         toast.error('Could not authorize with Google', {
