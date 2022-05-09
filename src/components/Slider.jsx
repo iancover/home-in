@@ -13,15 +13,18 @@ import SwiperCore, {
 } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-
+// Component
+import Spinner from './Spinner';
 // Swiper: enable modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
+
 /**
  * @desc Swiper component to display listings cover images and details
- * @see Explore
+ * @see Explore 
  */
 function Slider() {
+  const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState(null);
 
   // to goto listing on img click
@@ -46,10 +49,15 @@ function Slider() {
       });
       // set states
       setListings(listings);
+      setLoading(false);
     };
 
     fetchListings();
   }, []);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   // dont display anything if no listings
   if (listings.length === 0) {
