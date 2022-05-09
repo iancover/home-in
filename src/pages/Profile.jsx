@@ -180,8 +180,8 @@ function Profile() {
           </form>
         </div>
 
-        {(auth.currentUser.uid === process.env.REACT_APP_ADMIN_ID ||
-          process.env.REACT_APP_USER_ID) && (
+        {auth.currentUser.uid ===
+          (process.env.REACT_APP_ADMIN_ID || process.env.REACT_APP_USER_ID) && (
           <Link to='/create-listing' className='create-listing-link'>
             <img src={homeIcon} alt='home' />
             <p>Sell or Rent your home</p>
