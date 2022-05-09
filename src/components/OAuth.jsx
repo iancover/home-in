@@ -18,31 +18,35 @@ function OAuth() {
 
   // Google OAuth popup verify or create new user
   const onGoogleClick = async () => {
-    try {
-      // verify Google OAuth user
-      const auth = getAuth();
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+    if (location.pathname === '/sign-in') { // <- *** REMOVE TO ENABLE ***
+      try {
+        // verify Google OAuth user
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
 
-      // *** TO DISABLE NEW USERS *** (only toui.koneho auth)
-      if (user.email !== process.env.REACT_APP_USER_GMAIL) {
-        auth.logout();
-      } else {
-        // check if user doesnt exist, create in db in 'users' collection
-        const docRef = doc(db, 'users', user.uid);
-        const docSnap = await getDoc(docRef);
-        if (!docSnap.exists()) {
-          await setDoc(doc(db, 'users', user.uid), {
-            name: user.displayName,
-            email: user.email,
-            timestamp: serverTimestamp(),
-          });
+        // TO DISABLE NEW USERS
+        if (user.email !== process.env.REACT_APP_USER_GMAIL) { // <- *** REMOVE ***
+          auth.logout();
+        } else {
+          // check if user doesnt exist, create in db in 'users' collection
+          const docRef = doc(db, 'users', user.uid);
+          const docSnap = await getDoc(docRef);
+          if (!docSnap.exists()) {
+            await setDoc(doc(db, 'users', user.uid), {
+              name: user.displayName,
+              email: user.email,
+              timestamp: serverTimestamp(),
+            });
+          }
         }
+        navigate('/profile');
+      } catch (error) {
+        toast.error('Could not authorize with Google');
       }
-      navigate('/profile');
-    } catch (error) {
-      toast.error('Could not authorize with Google');
+    } else {   // <- *** REMOVE TO ENABLE ***
+      toast.error('Feature disabled');
     }
   };
 
